@@ -3,9 +3,16 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "start": "nx serve",
-    "build": "nx build",
-    "test": "nx test"
+    "start": "nx run-many --all --target=serve --prod",
+    "build": "nx run-many --all --target=build --prod",
+    "start:dev:backend": "nx run backend:serve",
+    "start:dev:frontend": "nx run frontend:serve",
+    "build:frontend": "nx run frontend:build:production",
+    "start:frontend": "nx run frontend:serve:production",
+    "build:backend": "nx run backend:build:production",
+    "start:backend": "nx run backend:serve:production",
+    "test": "nx test",
+    "dev": "nx run-many --all --target=serve"
   },
   "private": true,
   "dependencies": {
