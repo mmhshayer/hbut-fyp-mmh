@@ -29,5 +29,9 @@ export class UsersService {
   remove(id: number) {
     return `This action removes a #${id} user`;
   }
+
+  findOneByUserName(username: string) {
+    return this.userModel.findOne({ username });
+  }
 }
 
