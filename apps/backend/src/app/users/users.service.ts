@@ -7,8 +7,10 @@ import { User, UserDocument } from './schemas/user.schema';
 export class UsersService {
   constructor(@InjectModel(User.name) private userModel: Model<UserDocument>) {}
 
-  findOneByUsername(username: string) {
-    return this.userModel.findOne({ username });
+  findOneByUsername(username: string, excludePassword = true) {
+    return this.userModel
+      .findOne({ username })
+      .select(excludePassword ? '-password' : '');
   }
 
   async createUser(username: string, password: string) {
