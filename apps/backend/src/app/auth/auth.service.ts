@@ -37,7 +37,8 @@ export class AuthenticationService {
       WARNING: this sets the payload (user) for authentication
     */
     const payload = {
-      ...user,
+      _id: user.id,
+      username: user.username,
     };
 
     return {
