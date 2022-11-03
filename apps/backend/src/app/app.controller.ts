@@ -1,4 +1,4 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Request } from '@nestjs/common';
 
 import { AppService } from './app.service';
 
@@ -9,5 +9,15 @@ export class AppController {
   @Get()
   getData() {
     return this.appService.getData();
+  }
+
+  @Get('mongo')
+  getMongoConnectionStatus() {
+    return this.appService.getMongoConnectionStatus();
+  }
+
+  @Get('whoami')
+  whoami(@Request() req) {
+    return this.appService.whoami(req);
   }
 }
