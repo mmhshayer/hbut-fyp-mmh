@@ -1,0 +1,53 @@
+[
+  {
+    "_id": "9f9d3ecc-0e1f-486a-a101-610ea2409743",
+    "colName": "hbut-fyp-mmh",
+    "created": "2022-11-03T07:07:45.737Z",
+    "sortNum": 10000,
+    "folders": [
+      {
+        "_id": "f9ffed70-5606-4ff7-b155-404908ca6740",
+        "name": "users",
+        "containerId": "",
+        "created": "2022-11-03T07:07:55.458Z",
+        "sortNum": 10000
+      },
+      {
+        "_id": "c7246da1-5452-47bf-829c-b4297ae9a770",
+        "name": "auth",
+        "containerId": "",
+        "created": "2022-11-03T10:18:25.005Z",
+        "sortNum": 20000
+      },
+      {
+        "_id": "ec1b245b-2381-4dc5-a25f-9f4520a38c79",
+        "name": "root",
+        "containerId": "",
+        "created": "2022-11-03T21:17:43.598Z",
+        "sortNum": 30000
+      }
+    ],
+    "settings": {
+      "headers": [],
+      "auth": {
+        "type": "bearer",
+        "bearer": "{{token}}"
+      },
+      "tests": [],
+      "options": {
+        "baseUrl": "http://localhost:5000/api"
+      },
+      "preReq": {
+        "runRequests": [
+          {
+            "reqId": "3c601d64-c48d-42bc-807f-08975ee7354d",
+            "colId": "9f9d3ecc-0e1f-486a-a101-610ea2409743",
+            "triggerCondition": "run-var-empty",
+            "triggerValue": "{{token}}"
+          }
+        ]
+      },
+      "envId": "b5022df9-1442-485f-a97a-1d4a839ba1a4"
+    }
+  }
+]
