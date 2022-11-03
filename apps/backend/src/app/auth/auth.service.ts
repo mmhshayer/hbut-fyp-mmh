@@ -8,7 +8,7 @@ import { UsersService } from '../users/users.service';
 import { AuthTDto } from './auth.dto';
 
 import {
-  comparePassword,
+  compareDtoWithDbPassword,
   hashPassword,
 } from '../../core/utils/passwords.utils';
 import { IAuthPayload } from './payload.interface';
@@ -26,11 +26,17 @@ export class AuthenticationService {
   }
 
   async login(authTDto: AuthTDto) {
-    const user = await this.usersService.findOneByUsername(authTDto.username);
+    const user = await this.usersService.findOneByUsername(
+      authTDto.username,
+      false
+    );
     if (!user) {
       throw new NotFoundException('User not found');
     }
-    const isValidPassword = comparePassword(authTDto.password, user.password);
+    const isValidPassword = compareDtoWithDbPassword(
+      authTDto.password,
+      user.password
+    );
     if (!isValidPassword) {
       throw new UnauthorizedException('Invalid password');
     }

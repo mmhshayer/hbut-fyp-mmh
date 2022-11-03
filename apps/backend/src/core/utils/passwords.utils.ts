@@ -6,6 +6,9 @@ export const hashPassword = (password: string) => {
   return hashedPassword;
 };
 
-export const comparePassword = (loginPassword: string, dbPassword: string) => {
-  return compareSync(dbPassword, loginPassword);
+export const compareDtoWithDbPassword = (
+  dtoPassword: string,
+  dbPassword: string
+) => {
+  return compareSync(dtoPassword, dbPassword);
 };

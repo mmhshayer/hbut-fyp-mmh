@@ -10,7 +10,7 @@ export class UsersService {
   findOneByUsername(username: string, excludePassword = true) {
     return this.userModel
       .findOne({ username })
-      .select(excludePassword ? '-password' : '');
+      .select(excludePassword ? '-password' : null);
   }
 
   async createUser(username: string, password: string) {
