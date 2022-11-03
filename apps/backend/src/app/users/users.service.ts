@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { ConflictException, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { User, UserDocument } from './schemas/user.schema';
@@ -14,7 +14,7 @@ export class UsersService {
   async createUser(username: string, password: string) {
     const exists = await this.userModel.exists({ username });
     if (exists) {
-      throw new Error('User already exists');
+      throw new ConflictException('User already exists');
     }
     const newUser = await this.userModel.create({
       username,
@@ -24,4 +24,3 @@ export class UsersService {
     return user;
   }
 }
-
