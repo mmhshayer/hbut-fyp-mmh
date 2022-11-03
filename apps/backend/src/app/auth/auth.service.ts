@@ -3,14 +3,15 @@ import {
   NotFoundException,
   UnauthorizedException,
 } from '@nestjs/common';
-import { UsersService } from '../users/users.service';
 import { JwtService } from '@nestjs/jwt';
+import { UsersService } from '../users/users.service';
 import { AuthTDto } from './auth.dto';
-import * as bcrypt from 'bcrypt';
+
 import {
   comparePassword,
   hashPassword,
 } from '../../core/utils/passwords.utils';
+import { IAuthPayload } from './payload.interface';
 
 @Injectable()
 export class AuthenticationService {
@@ -36,7 +37,7 @@ export class AuthenticationService {
     /*
       WARNING: this sets the payload (user) for authentication
     */
-    const payload = {
+    const payload: IAuthPayload = {
       _id: user.id,
       username: user.username,
     };
