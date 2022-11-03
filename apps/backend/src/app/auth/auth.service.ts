@@ -1,8 +1,16 @@
-import { Injectable } from '@nestjs/common';
+import {
+  Injectable,
+  NotFoundException,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { UsersService } from '../users/users.service';
 import { JwtService } from '@nestjs/jwt';
 import { AuthTDto } from './auth.dto';
 import * as bcrypt from 'bcrypt';
+import {
+  comparePassword,
+  hashPassword,
+} from '../../core/utils/passwords.utils';
 
 @Injectable()
 export class AuthenticationService {
@@ -12,26 +20,28 @@ export class AuthenticationService {
   ) {}
 
   async register(authTDto: AuthTDto) {
-    const saltOrRounds = 10;
-    const hashedPassword = await bcrypt.hash(authTDto.password, saltOrRounds);
+    const hashedPassword = hashPassword(authTDto.password);
     return this.usersService.createUser(authTDto.username, hashedPassword);
   }
 
   async login(authTDto: AuthTDto) {
     const user = await this.usersService.findOneByUsername(authTDto.username);
     if (!user) {
-      throw new Error('User not found');
+      throw new NotFoundException('User not found');
     }
-    const isValidPassword = await bcrypt.compare(
-      authTDto.password,
-      user.password
-    );
+    const isValidPassword = comparePassword(authTDto.password, user.password);
     if (!isValidPassword) {
-      throw new Error('Invalid password');
+      throw new UnauthorizedException('Invalid password');
     }
-    const { password: _, ...userWithoutPassword } = user;
+    /*
+      WARNING: this sets the payload (user) for authentication
+    */
+    const payload = {
+      ...user,
+    };
+
     return {
-      access_token: this.jwtService.sign(userWithoutPassword),
+      access_token: this.jwtService.sign(payload),
     };
   }
 }
