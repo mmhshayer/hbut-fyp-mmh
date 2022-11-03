@@ -15,7 +15,7 @@ import { UsersModule } from './users';
       type: 'mongodb',
       url: getMongoConfig(),
       database: 'nest',
-      entities: [join(__dirname, '**/**.entity{.ts,.js}')],
+      entities: [join(__dirname, '/../**/**.entity{.ts,.js}')],
       synchronize: true,
       useNewUrlParser: true,
       logging: true,
