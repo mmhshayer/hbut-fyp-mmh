@@ -1,15 +1,56 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+import {
+  IsEmail,
+  IsEnum,
+  IsOptional,
+  IsString,
+  MinLength,
+} from 'class-validator';
 import { Document } from 'mongoose';
+import { Status } from '../../../common/enumerators/status.enum';
 
 export type UserDocument = User & Document;
 
-@Schema()
+@Schema({ timestamps: true })
 export class User {
-  @Prop()
+  @IsString()
+  @Prop({
+    type: String,
+    required: true,
+  })
+  name: string;
+
+  @IsEmail()
+  @Prop({
+    type: String,
+    required: true,
+    unique: true,
+  })
+  email: string;
+
+  @Prop({
+    type: String,
+    required: false,
+  })
   username: string;
 
-  @Prop()
+  @IsString()
+  @MinLength(8)
+  @Prop({
+    type: String,
+    required: true,
+  })
   password: string;
+
+  @IsOptional()
+  @IsEnum(Status)
+  @Prop({
+    type: String,
+    enum: Status,
+    required: false,
+    default: Status.Active,
+  })
+  status: Status;
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);
