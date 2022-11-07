@@ -46,6 +46,7 @@
     "@nrwl/jest": "15.0.5",
     "@nrwl/linter": "15.0.5",
     "@nrwl/nest": "15.0.5",
+    "@nrwl/next": "^15.0.10",
     "@nrwl/node": "15.0.5",
     "@nrwl/nx-cloud": "latest",
     "@nrwl/workspace": "15.0.5",
