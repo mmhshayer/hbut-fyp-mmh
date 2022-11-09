@@ -7,6 +7,7 @@ import { ApiActionType } from './api-action.enum';
 import ApiReducer from './api.reducer';
 import client from './client.config';
 import { IRequestState } from './api.interface';
+import { useAuth } from '../auth';
 
 interface ApiCallConfig {
   lazy?: boolean;
@@ -48,7 +49,7 @@ function useApi<
       }
     >
   >(ApiReducer<ResponseType, ErrorType>, defaultRequestState);
-  // const { token, logout } = useAuth();
+  const { token, logout } = useAuth();
   const { push, asPath, pathname, isReady } = useRouter();
 
   const callApi = async (data?: RequestType) => {
@@ -56,10 +57,10 @@ function useApi<
     try {
       const res = await client.request({
         data,
-        // headers: {
-        //   ...(token && { Authorization: `Bearer ${token}` }),
-        //   ...requestHeaders,
-        // },
+        headers: {
+          ...(token && { Authorization: `Bearer ${token}` }),
+          ...requestHeaders,
+        },
         method,
         ...rest,
       });
@@ -97,7 +98,7 @@ function useApi<
   //   }
   // }, [state.error]);
 
-  // let manual resetting the states
+  // For manualy resetting the state
   const reset = () => {
     dispatch({
       action: ApiActionType.RESET,
