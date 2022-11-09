@@ -3,8 +3,8 @@ import TextField, { TextFieldProps } from '@mui/material/TextField';
 import { Field, FieldProps, GenericFieldHTMLAttributes } from 'formik';
 import VisibilityOffSharpIcon from '@mui/icons-material/VisibilityOffSharp';
 import VisibilitySharpIcon from '@mui/icons-material/VisibilitySharp';
-import InputAdornment from '@mui/material/InputAdornment/InputAdornment';
-import { useState } from 'react';
+import InputAdornment from '@mui/material/InputAdornment';
+import { FC, useState } from 'react';
 
 type FormikPasswordFieldProps = GenericFieldHTMLAttributes & {
   apiErrors?: string[];
