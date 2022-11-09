@@ -1,14 +1,14 @@
 import { AppProps } from 'next/app';
-import { GlobalProviders } from '../global';
+import { Defaultlayout } from '../layouts';
 
-function CustomApp({ Component, pageProps }: AppProps) {
+function App({ Component, pageProps }: AppProps) {
   return (
     <>
-      <GlobalProviders>
+      <Defaultlayout>
         <Component {...pageProps} />
-      </GlobalProviders>
+      </Defaultlayout>
     </>
   );
 }
 
-export default CustomApp;
+export default App;

@@ -1,9 +1,7 @@
-import NavBar from '../components/navbar/navbar.component';
-
 export function Index() {
   return (
     <>
-      <NavBar />
+      <h1>index page</h1>
     </>
   );
 }
