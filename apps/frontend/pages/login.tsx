@@ -1,6 +1,6 @@
 import Container from '@mui/system/Container/Container';
 import { NextPage } from 'next/types';
-import { LoginForm } from '../components/login';
+import { LoginForm } from '../components/auth';
 
 const Login: NextPage = () => {
   return (
