@@ -1,11 +1,13 @@
 import { AppProps } from 'next/app';
 import { Defaultlayout } from '../layouts';
+import { ToastContainer } from 'react-toastify';
 
 function App({ Component, pageProps }: AppProps) {
   return (
     <>
       <Defaultlayout>
         <Component {...pageProps} />
+        <ToastContainer />
       </Defaultlayout>
     </>
   );
