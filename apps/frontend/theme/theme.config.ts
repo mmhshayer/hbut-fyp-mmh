@@ -1,7 +1,7 @@
 import { createTheme, responsiveFontSizes } from '@mui/material/styles';
 import palette from './common/palette';
 import typography from './common/typography';
-import button from './overrides/button.override';
+import { button, inputLabel } from './overrides';
 
 export const EnableDarkMode = false;
 
@@ -10,6 +10,7 @@ const ThemeConfig = responsiveFontSizes(
     palette,
     components: {
       ...button,
+      ...inputLabel,
     },
     typography,
   })
