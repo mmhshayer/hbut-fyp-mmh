@@ -43,22 +43,12 @@ export default function LoginForm({ sx }: LoginFormProps) {
   const { data, error, callApi } = useApi<LoginResponse, ILogin>({
     url: '/auth/login',
     method: 'POST',
-    data: {
-      username: 'mustakim',
-      password: '123456',
-    },
   });
 
   const onSubmit = async (values: ILogin, _: FormikHelpers<ILogin>) => {
-    // use await to get the form disabling effect
     const { email, ...rest } = values;
-    // await callApi({ username: email.trim(), ...rest });
-    await callApi({ username: 'mustakim', password: '123456' });
-    console.log('values', values);
+    await callApi({ email: email.trim(), ...rest });
   };
-
-  console.log('data', data);
-  console.log('error', error);
 
   return (
     <PageLoader loading={loading}>
