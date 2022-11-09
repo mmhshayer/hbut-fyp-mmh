@@ -22,14 +22,11 @@ export class AuthenticationService {
 
   async register(authTDto: AuthTDto) {
     const hashedPassword = hashPassword(authTDto.password);
-    return this.usersService.createUser(authTDto.username, hashedPassword);
+    return this.usersService.createUser(authTDto.email, hashedPassword);
   }
 
   async login(authTDto: AuthTDto) {
-    const user = await this.usersService.findOneByUsername(
-      authTDto.username,
-      false
-    );
+    const user = await this.usersService.findOneByEmail(authTDto.email, false);
     if (!user) {
       throw new NotFoundException('User not found');
     }
@@ -45,7 +42,7 @@ export class AuthenticationService {
     */
     const payload: IAuthPayload = {
       _id: user.id,
-      username: user.username,
+      email: user.email,
     };
 
     return {

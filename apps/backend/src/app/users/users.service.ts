@@ -7,9 +7,9 @@ import { User, UserDocument } from './schemas/user.schema';
 export class UsersService {
   constructor(@InjectModel(User.name) private userModel: Model<UserDocument>) {}
 
-  findOneByUsername(username: string, excludePassword = true) {
+  findOneByEmail(email: string, excludePassword = true) {
     return this.userModel
-      .findOne({ username })
+      .findOne({ email })
       .select(excludePassword ? '-password' : null);
   }
 
