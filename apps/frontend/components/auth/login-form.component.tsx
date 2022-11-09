@@ -5,13 +5,15 @@ import Box from '@mui/system/Box/Box';
 import { Form, Formik, FormikHelpers } from 'formik';
 import { useState, useEffect } from 'react';
 import * as Yup from 'yup';
-import { PageLoader } from '../common';
+import { Alert, PageLoader } from '../common';
 import useApi from '../../hooks/api/use-api.hook';
+import useAuth from '../../hooks/auth/use-auth.hook';
 import {
   FormikPasswordField,
   FormikSubmitButton,
   FormikTextField,
 } from '../form';
+import { ILogin, LoginResponse } from './auth.interface';
 
 interface LoginFormProps {
   sx?: SxProps;
@@ -25,20 +27,13 @@ const validationSchema = Yup.object().shape({
   password: Yup.string().required('Password is Required'),
 });
 
-interface ILogin {
-  email: string;
-  password: string;
-}
-
 const initialValues: ILogin = {
   email: '',
   password: '',
 };
-interface LoginResponse {
-  accessToken: string;
-}
 
 export default function LoginForm({ sx }: LoginFormProps) {
+  const { login } = useAuth();
   const [loading, setLoading] = useState(false);
   const { data, error, callApi } = useApi<LoginResponse, ILogin>({
     url: '/auth/login',
@@ -50,6 +45,14 @@ export default function LoginForm({ sx }: LoginFormProps) {
     await callApi({ email: email.trim(), ...rest });
   };
 
+  useEffect(() => {
+    if (data) {
+      setLoading(true);
+      console.log(data);
+      login(data.access_token);
+    }
+  }, [data]);
+
   return (
     <PageLoader loading={loading}>
       <Box sx={{ ...sx }}>
@@ -59,6 +62,13 @@ export default function LoginForm({ sx }: LoginFormProps) {
           }}
         >
           <Typography variant="h4">Welcome Back</Typography>
+
+          {error?.statusMessage && (
+            <Alert severity="error" sx={{ mt: 2 }}>
+              {/* {error.message && t(error.message)} */}
+              {error.statusMessage}
+            </Alert>
+          )}
 
           <Formik
             initialValues={initialValues}
