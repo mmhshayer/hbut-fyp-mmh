@@ -12,34 +12,31 @@ function NavBar() {
   const { token } = useAuth();
 
   return (
-    <>
-      <Box sx={{ display: 'flex', flexGrow: 1 }}>
-        <AppBar
-          position="fixed"
-          sx={{ bgcolor: 'background.default', color: 'text.primary' }}
+    <AppBar
+      component="nav"
+      position="sticky"
+      sx={{ bgcolor: 'background.default', color: 'text.primary' }}
+    >
+      <Toolbar>
+        <IconButton
+          size="large"
+          edge="start"
+          color="inherit"
+          aria-label="menu"
+          sx={{ mr: 2 }}
         >
-          <Toolbar>
-            <IconButton
-              size="large"
-              edge="start"
-              color="inherit"
-              aria-label="menu"
-              sx={{ mr: 2 }}
-            >
-              <MenuIcon />
-            </IconButton>
-            <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-              News
-            </Typography>
-            {token ? (
-              <ProfileButton />
-            ) : (
-              <LinkButton href="/login">Login</LinkButton>
-            )}
-          </Toolbar>
-        </AppBar>
-      </Box>
-    </>
+          <MenuIcon />
+        </IconButton>
+        <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+          News
+        </Typography>
+        {token ? (
+          <ProfileButton />
+        ) : (
+          <LinkButton href="/login">Login</LinkButton>
+        )}
+      </Toolbar>
+    </AppBar>
   );
 }
 
