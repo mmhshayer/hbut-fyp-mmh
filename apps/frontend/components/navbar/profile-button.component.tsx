@@ -3,6 +3,7 @@ import IconButton from '@mui/material/IconButton';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import { useState } from 'react';
+import LinkButton from '../common/link-button.component';
 
 function ProfileButton() {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -42,7 +43,9 @@ function ProfileButton() {
       >
         <MenuItem onClick={handleClose}>Profile</MenuItem>
         <MenuItem onClick={handleClose}>My account</MenuItem>
-        <MenuItem onClick={handleClose}>Logout</MenuItem>
+        <MenuItem onClick={handleClose}>
+          <LinkButton href="/logout">Logout</LinkButton>
+        </MenuItem>
       </Menu>
     </div>
   );
