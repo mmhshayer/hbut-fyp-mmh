@@ -4,22 +4,28 @@ import { FC, PropsWithChildren } from 'react';
 
 interface LinkButtonProps {
   href: string;
-  buttonProps?: ButtonProps;
+  props?: ButtonProps;
 }
 
 const LinkButton: FC<PropsWithChildren<LinkButtonProps>> = ({
   href,
-  buttonProps,
+  props,
   children,
 }) => {
   return (
-    <Link href={href} passHref>
+    <Link
+      href={href}
+      style={{
+        textDecoration: 'none',
+      }}
+      passHref
+    >
       <Button
         size="small"
         variant="outlined"
         color="primary"
         LinkComponent="a"
-        {...buttonProps}
+        {...props}
       >
         {children}
       </Button>
