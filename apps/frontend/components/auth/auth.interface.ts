@@ -3,6 +3,8 @@ export interface ILogin {
   password: string;
 }
 
+export type IForforPassword = Omit<ILogin, 'password'>;
+
 export interface LoginResponse {
   access_token: string;
 }
