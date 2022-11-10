@@ -2,7 +2,6 @@ import { useUser } from '../features/user';
 
 export function Index() {
   const { user } = useUser();
-  console.log(user);
   return (
     <>
       <h1>Home</h1>
