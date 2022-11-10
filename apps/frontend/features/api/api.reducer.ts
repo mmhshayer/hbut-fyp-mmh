@@ -1,4 +1,4 @@
-import { ApiActionType } from './api-action.enum';
+import { ApiActionType } from './api.enum';
 import { IRequestState } from './api.interface';
 
 function ApiReducer<ResponseType, ErrorType>(

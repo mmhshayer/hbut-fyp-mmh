@@ -3,7 +3,7 @@ import { AxiosError, AxiosRequestConfig } from 'axios';
 // import { I18nMessage } from 'features/i18n';
 import { useRouter } from 'next/router';
 import { Reducer, useEffect, useReducer } from 'react';
-import { ApiActionType } from './api-action.enum';
+import { ApiActionType } from './api.enum';
 import ApiReducer from './api.reducer';
 import client from './client.config';
 import { IRequestState } from './api.interface';

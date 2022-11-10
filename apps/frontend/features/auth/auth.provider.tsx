@@ -1,5 +1,5 @@
 import { FC, PropsWithChildren, useEffect, useReducer } from 'react';
-import { AuthActionType } from './auth-action.enum';
+import { AuthActionType } from './auth.enum';
 import { readAuthToken, readBackupAuthToken } from './auth.utils';
 import { LocalStorageAccessTokenKey } from './constants';
 

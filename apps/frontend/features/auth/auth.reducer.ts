@@ -1,6 +1,6 @@
 import { Reducer } from 'react';
 
-import { AuthActionType } from './auth-action.enum';
+import { AuthActionType } from './auth.enum';
 import { saveAuthToken, saveBackupAuthToken } from './auth.utils';
 
 export type AuthReducerStateType = {

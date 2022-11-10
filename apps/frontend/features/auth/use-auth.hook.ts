@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import AuthContext from './auth.context';
-import { AuthActionType } from './auth-action.enum';
+import { AuthActionType } from './auth.enum';
 
 export default function useAuth() {
   const { dispatch, ...rest } = useContext(AuthContext);
