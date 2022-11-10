@@ -1,10 +1,4 @@
-export const PublicOnlyRoutes: string[] = [
-  '/login',
-  '/register',
-  '/forgot-password',
-  '/reset-password',
-  '/subaccount-register',
-];
+export const PublicOnlyRoutes: string[] = ['/login', '/register', '/forgot-password'];
 
 export const PublicRoutes: string[] = ['/'];
 
