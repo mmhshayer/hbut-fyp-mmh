@@ -1,7 +1,7 @@
 import { FC, PropsWithChildren } from 'react';
 import { Footer } from '../components/footer';
 import { NavBar } from '../components/navbar';
-import { GlobalProviders } from '../hooks/global';
+import { GlobalProviders } from '../features/global';
 
 const Defaultlayout: FC<PropsWithChildren> = ({ children }) => {
   return (

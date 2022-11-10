@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import { PageLoader } from '../common';
-import useAuth from '../../hooks/auth/use-auth.hook';
+import useAuth from '../../features/auth/use-auth.hook';
 import { UserDashboard } from './route-guard.config';
 
 export default function Logout() {

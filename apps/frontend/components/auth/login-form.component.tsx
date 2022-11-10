@@ -6,8 +6,8 @@ import { Form, Formik, FormikHelpers } from 'formik';
 import { useState, useEffect } from 'react';
 import * as Yup from 'yup';
 import { Alert, PageLoader } from '../common';
-import useApi from '../../hooks/api/use-api.hook';
-import useAuth from '../../hooks/auth/use-auth.hook';
+import useApi from '../../features/api/use-api.hook';
+import useAuth from '../../features/auth/use-auth.hook';
 import {
   FormikPasswordField,
   FormikSubmitButton,

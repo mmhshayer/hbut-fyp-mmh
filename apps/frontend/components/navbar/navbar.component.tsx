@@ -6,7 +6,7 @@ import Typography from '@mui/material/Typography/Typography';
 import Box from '@mui/system/Box/Box';
 import { LinkButton } from '../common';
 import ProfileButton from './profile-button.component';
-import useAuth from '../../hooks/auth/use-auth.hook';
+import useAuth from '../../features/auth/use-auth.hook';
 
 function NavBar() {
   const { token } = useAuth();
