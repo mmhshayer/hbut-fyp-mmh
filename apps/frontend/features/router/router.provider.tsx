@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router';
 import { FC, PropsWithChildren, useEffect, useReducer } from 'react';
 import { useAuth } from '../auth';
+import { useUser } from '../user';
 import {
   LoginRoute,
   LogoutRoute,
@@ -21,7 +22,7 @@ const RouteGuardProvider: FC<PropsWithChildren> = ({ children }) => {
     RouteGuardInitialValue
   );
   const { token, loaded: tokenLoaded } = useAuth();
-  // const { user, currentCompany } = useUser();
+  const { user } = useUser();
   const {
     asPath,
     pathname,

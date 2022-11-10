@@ -1,6 +1,6 @@
 import { FC, PropsWithChildren } from 'react';
 import { AuthProvider } from '../auth';
-import { RouteGuardProvider } from '../router';
+import { RouteGuard, RouteGuardProvider } from '../router';
 import { ThemeProvider } from '../../theme';
 import { UserProvider } from '../user';
 
@@ -9,7 +9,10 @@ const GlobalProviders: FC<PropsWithChildren> = ({ children }) => {
     <AuthProvider>
       <UserProvider>
         <RouteGuardProvider>
-          <ThemeProvider>{children}</ThemeProvider>
+          <ThemeProvider>
+            {/* <RouteGuard>{children}</RouteGuard> */}
+            {children}
+          </ThemeProvider>
         </RouteGuardProvider>
       </UserProvider>
     </AuthProvider>
