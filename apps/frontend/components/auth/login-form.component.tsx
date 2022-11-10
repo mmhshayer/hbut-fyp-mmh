@@ -48,7 +48,6 @@ export default function LoginForm({ sx }: LoginFormProps) {
   useEffect(() => {
     if (data) {
       setLoading(true);
-      console.log(data);
       login(data.access_token);
     }
   }, [data]);

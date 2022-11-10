@@ -9,7 +9,6 @@ export default function useAuth() {
     if (dispatch) {
       dispatch({ action: AuthActionType.UPDATE_TOKEN, payload: { token } });
     }
-    console.log('login', token);
   };
 
   const logout = () => {
