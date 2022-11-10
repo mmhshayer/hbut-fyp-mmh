@@ -2,7 +2,7 @@ import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import { PageLoader } from '../common';
 import useAuth from '../../features/auth/use-auth.hook';
-import { UserDashboard } from './route-guard.config';
+
 
 export default function Logout() {
   const { logout, loaded } = useAuth();
@@ -14,7 +14,7 @@ export default function Logout() {
   useEffect(() => {
     if (loaded) {
       logout();
-      push(`${UserDashboard}?next=${next}`);
+      push(`${next}`);
     }
   }, [loaded]);
 
