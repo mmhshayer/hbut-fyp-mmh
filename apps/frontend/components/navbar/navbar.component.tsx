@@ -3,13 +3,12 @@ import AppBar from '@mui/material/AppBar/AppBar';
 import IconButton from '@mui/material/IconButton/IconButton';
 import Toolbar from '@mui/material/Toolbar/Toolbar';
 import Typography from '@mui/material/Typography/Typography';
-import Box from '@mui/system/Box/Box';
 import { LinkButton } from '../common';
 import ProfileButton from './profile-button.component';
-import useAuth from '../../features/auth/use-auth.hook';
+import useUser from '../../features/user/use-user.hook';
 
 function NavBar() {
-  const { token } = useAuth();
+  const { user } = useUser();
 
   return (
     <AppBar
@@ -30,7 +29,7 @@ function NavBar() {
         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
           News
         </Typography>
-        {token ? (
+        {user ? (
           <ProfileButton />
         ) : (
           <LinkButton href="/login">Login</LinkButton>
