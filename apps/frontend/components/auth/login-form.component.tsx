@@ -14,10 +14,7 @@ import {
   FormikTextField,
 } from '../form';
 import { ILogin, LoginResponse } from './auth.interface';
-
-interface LoginFormProps {
-  sx?: SxProps;
-}
+import { PageProps } from '../../shared';
 
 const validationSchema = Yup.object().shape({
   email: Yup.string()
@@ -32,7 +29,7 @@ const initialValues: ILogin = {
   password: '',
 };
 
-export default function LoginForm({ sx }: LoginFormProps) {
+export default function LoginForm({ sx }: PageProps) {
   const { login } = useAuth();
   const [loading, setLoading] = useState(false);
   const { data, error, callApi } = useApi<LoginResponse, ILogin>({
