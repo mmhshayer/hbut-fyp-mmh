@@ -1,7 +1,7 @@
 import { FC, PropsWithChildren } from 'react';
-import { AuthProvider } from '../hooks/auth';
-import { RouteGuardProvider } from '../hooks/router';
-import { ThemeProvider } from '../theme';
+import { AuthProvider } from '../auth';
+import { RouteGuardProvider } from '../router';
+import { ThemeProvider } from '../../theme';
 
 const GlobalProviders: FC<PropsWithChildren> = ({ children }) => {
   return (
