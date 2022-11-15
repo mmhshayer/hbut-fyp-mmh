@@ -7,7 +7,7 @@ import {
   MinLength,
 } from 'class-validator';
 import { Document, Types } from 'mongoose';
-import { Status } from '../../../common/enumerators/status.enum';
+import { Status } from '../../common/enumerators/status.enum';
 
 export type UserDocument = User & Document;
 export type UserDocumentWithId = UserDocument & { _id: Types.ObjectId };

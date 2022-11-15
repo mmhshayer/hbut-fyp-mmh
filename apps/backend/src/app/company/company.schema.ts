@@ -2,7 +2,7 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { IsEnum, IsMongoId, IsString } from 'class-validator';
 import mongoose, { Types } from 'mongoose';
 import { Status } from '../../common/enumerators/status.enum';
-import { User } from '../users/schemas/user.schema';
+import { User } from '../users';
 
 export type CompanyDocument = Company & mongoose.Document;
 export type CompanyDocumentWithId = CompanyDocument & { _id: Types.ObjectId };

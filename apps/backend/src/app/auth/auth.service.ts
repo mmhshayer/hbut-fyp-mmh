@@ -12,7 +12,7 @@ import {
   hashPassword,
 } from '../../core/utils/passwords.utils';
 import { IAuthPayload } from './payload.interface';
-import { User } from '../users/schemas/user.schema';
+import { User } from '../users';
 
 @Injectable()
 export class AuthenticationService {
