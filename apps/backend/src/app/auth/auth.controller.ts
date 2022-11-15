@@ -1,6 +1,6 @@
 import { Body, Controller, Post } from '@nestjs/common';
 import { PublicRoute } from '../../common/decorators';
-import { AuthTDto } from './auth.dto';
+import { AuthTDto, RegisterDto } from './auth.dto';
 import { AuthenticationService } from './auth.service';
 
 @Controller('auth')
@@ -9,8 +9,8 @@ export class AuthController {
 
   @PublicRoute()
   @Post('register')
-  register(@Body() authTDto: AuthTDto) {
-    return this.authService.register(authTDto);
+  register(@Body() registerDto: RegisterDto) {
+    return this.authService.register(registerDto);
   }
 
   @PublicRoute()

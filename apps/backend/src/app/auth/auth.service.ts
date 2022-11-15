@@ -5,13 +5,14 @@ import {
 } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { UsersService } from '../users/users.service';
-import { AuthTDto } from './auth.dto';
+import { AuthTDto, RegisterDto } from './auth.dto';
 
 import {
   compareDtoWithDbPassword,
   hashPassword,
 } from '../../core/utils/passwords.utils';
 import { IAuthPayload } from './payload.interface';
+import { User } from '../users/schemas/user.schema';
 
 @Injectable()
 export class AuthenticationService {
@@ -20,9 +21,14 @@ export class AuthenticationService {
     private readonly jwtService: JwtService
   ) {}
 
-  async register(authTDto: AuthTDto) {
-    const hashedPassword = hashPassword(authTDto.password);
-    return this.usersService.createUser(authTDto.email, hashedPassword);
+  async register(registerDto: RegisterDto) {
+    const { password, ...rest } = registerDto;
+    const hashedPassword = hashPassword(password);
+    const user = await this.usersService.createUser(
+      rest as User,
+      hashedPassword
+    );
+    return await this.login({ email: user.email, password });
   }
 
   async login(authTDto: AuthTDto) {

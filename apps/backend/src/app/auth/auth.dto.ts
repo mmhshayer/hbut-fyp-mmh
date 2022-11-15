@@ -7,3 +7,8 @@ export class AuthTDto {
   @IsString()
   password: string;
 }
+
+export class RegisterDto extends AuthTDto {
+  @IsString()
+  name: string;
+}
