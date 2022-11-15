@@ -26,6 +26,9 @@ const LinkButton: FC<PropsWithChildren<LinkButtonProps>> = ({
         color="primary"
         LinkComponent="a"
         {...props}
+        sx={{
+          m: 1,
+        }}
       >
         {children}
       </Button>
