@@ -1,14 +1,16 @@
 import { Injectable, ConflictException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { UserDocumentWithId } from '../users';
+import { UserDocumentWithId, UsersService } from '../users';
 import { CreateCompanyDto, UpdateCompanyDto } from './company.dto';
 import { Company } from './company.schema';
+import { RoleAtCompany } from '../../common/enumerators';
 
 @Injectable()
 export class CompanyService {
   constructor(
-    @InjectModel('Company') private readonly companyModel: Model<Company>
+    @InjectModel('Company') private readonly companyModel: Model<Company>,
+    private readonly userService: UsersService
   ) {}
 
   async create(user: UserDocumentWithId, createCompanyDto: CreateCompanyDto) {
@@ -23,7 +25,13 @@ export class CompanyService {
       users: [user._id],
     });
 
-    return company.save();
+    await this.userService.addCompanyToUser(
+      user._id,
+      company._id,
+      RoleAtCompany.PrimaryAccount
+    );
+
+    return company;
   }
 
   findAll() {

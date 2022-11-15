@@ -1,7 +1,8 @@
 import { ConflictException, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { Model } from 'mongoose';
+import { Model, Types } from 'mongoose';
 import { User, UserDocument } from './user.schema';
+import { RoleAtCompany } from '../../common/enumerators';
 
 @Injectable()
 export class UsersService {
@@ -25,5 +26,17 @@ export class UsersService {
     });
     const { password: _, ...rest } = newUser.toObject();
     return rest;
+  }
+
+  async addCompanyToUser(
+    userId: Types.ObjectId | string,
+    companyId: Types.ObjectId | string,
+    role: RoleAtCompany
+  ) {
+    const user = await this.userModel.findById(userId.toString());
+    if (user) {
+      return user;
+    }
+    return 'This action adds a new company to user';
   }
 }
