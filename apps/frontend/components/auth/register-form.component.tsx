@@ -4,7 +4,7 @@ import Box from '@mui/system/Box/Box';
 import { Form, Formik, FormikHelpers } from 'formik';
 import { useState, useEffect } from 'react';
 import * as Yup from 'yup';
-import { Alert, PageLoader } from '../common';
+import { Alert, LinkText, PageLoader } from '../common';
 import useApi from '../../features/api/use-api.hook';
 import useAuth from '../../features/auth/use-auth.hook';
 import {
@@ -15,6 +15,7 @@ import {
 import { IRegister, LoginResponse } from './auth.interface';
 import { PageProps } from '../../shared';
 import { trimValues } from '../../shared/trim-values.util';
+import Divider from '@mui/material/Divider';
 
 const validationSchema = Yup.object().shape({
   name: Yup.string().required('Name is required'),
@@ -64,14 +65,12 @@ export default function RegisterForm({ sx }: PageProps) {
           }}
         >
           <Typography variant="h4">Sign Up</Typography>
-
           {error?.statusMessage && (
             <Alert severity="error" sx={{ mt: 2 }}>
               {/* {error.message && t(error.message)} */}
               {error.statusMessage}
             </Alert>
           )}
-
           <Formik
             initialValues={initialValues}
             validationSchema={validationSchema}
@@ -86,7 +85,6 @@ export default function RegisterForm({ sx }: PageProps) {
                   placeholder: 'MD. John Doe',
                 }}
               />
-
               <FormikTextField
                 name="email"
                 // apiErrors={error?.validationErrors?.email}
@@ -95,7 +93,6 @@ export default function RegisterForm({ sx }: PageProps) {
                   placeholder: 'smith@gmail.com',
                 }}
               />
-
               <FormikPasswordField
                 name="password"
                 // apiErrors={error?.validationErrors?.password}
@@ -104,7 +101,6 @@ export default function RegisterForm({ sx }: PageProps) {
                   placeholder: 'At least 6 characters',
                 }}
               />
-
               <FormikPasswordField
                 name="passwordConfirmation"
                 // apiErrors={error?.validationErrors?.password}
@@ -113,7 +109,6 @@ export default function RegisterForm({ sx }: PageProps) {
                   placeholder: 'At least 6 characters',
                 }}
               />
-
               <Box
                 sx={{
                   display: 'flex',
@@ -125,6 +120,18 @@ export default function RegisterForm({ sx }: PageProps) {
               </Box>
             </Form>
           </Formik>
+          <Box
+            sx={{
+              mt: 2,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}
+          >
+            <LinkText href="/forgot-password">Forgot Password?</LinkText>
+            <Divider sx={{ my: 1 }}>or</Divider>
+            <LinkText href="/login">Already have an account?</LinkText>
+          </Box>
         </Card>
       </Box>
     </PageLoader>

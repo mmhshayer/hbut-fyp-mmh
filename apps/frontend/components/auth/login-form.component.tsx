@@ -1,20 +1,20 @@
 import Card from '@mui/material/Card/Card';
-import { SxProps } from '@mui/material/styles';
+import Divider from '@mui/material/Divider';
 import Typography from '@mui/material/Typography/Typography';
 import Box from '@mui/system/Box/Box';
 import { Form, Formik, FormikHelpers } from 'formik';
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import * as Yup from 'yup';
-import { Alert, PageLoader } from '../common';
 import useApi from '../../features/api/use-api.hook';
 import useAuth from '../../features/auth/use-auth.hook';
+import { PageProps } from '../../shared';
+import { Alert, LinkText, PageLoader } from '../common';
 import {
   FormikPasswordField,
   FormikSubmitButton,
   FormikTextField,
 } from '../form';
 import { ILogin, LoginResponse } from './auth.interface';
-import { PageProps } from '../../shared';
 
 const validationSchema = Yup.object().shape({
   email: Yup.string()
@@ -57,15 +57,15 @@ export default function LoginForm({ sx }: PageProps) {
             p: 4,
           }}
         >
-          <Typography variant="h4">Welcome Back</Typography>
-
+          <Typography variant="h4" align="center">
+            Welcome Back
+          </Typography>
           {error?.statusMessage && (
             <Alert severity="error" sx={{ mt: 2 }}>
               {/* {error.message && t(error.message)} */}
               {error.statusMessage}
             </Alert>
           )}
-
           <Formik
             initialValues={initialValues}
             validationSchema={validationSchema}
@@ -81,7 +81,6 @@ export default function LoginForm({ sx }: PageProps) {
                   placeholder: 'smith@gmail.com',
                 }}
               />
-
               <FormikPasswordField
                 name="password"
                 // apiErrors={error?.validationErrors?.password}
@@ -91,7 +90,6 @@ export default function LoginForm({ sx }: PageProps) {
                   placeholder: 'At least 6 characters',
                 }}
               />
-
               <Box
                 sx={{
                   display: 'flex',
@@ -100,10 +98,22 @@ export default function LoginForm({ sx }: PageProps) {
                 }}
               >
                 {/* <FormikSubmitButton>{t('submit')}</FormikSubmitButton> */}
-                <FormikSubmitButton>submit</FormikSubmitButton>
+                <FormikSubmitButton>Sign In</FormikSubmitButton>
               </Box>
             </Form>
           </Formik>
+          <Box
+            sx={{
+              mt: 2,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}
+          >
+            <LinkText href="/forgot-password">Forgot Password?</LinkText>
+            <Divider sx={{ my: 1 }}>or</Divider>
+            <LinkText href="/register">Create New Account</LinkText>
+          </Box>
         </Card>
       </Box>
     </PageLoader>
