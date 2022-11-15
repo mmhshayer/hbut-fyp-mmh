@@ -1,5 +1,4 @@
 import Card from '@mui/material/Card/Card';
-import { SxProps } from '@mui/material/styles';
 import Typography from '@mui/material/Typography/Typography';
 import Box from '@mui/system/Box/Box';
 import { Form, Formik, FormikHelpers } from 'formik';
@@ -15,6 +14,7 @@ import {
 } from '../form';
 import { IRegister, LoginResponse } from './auth.interface';
 import { PageProps } from '../../shared';
+import { trimValues } from '../../shared/trim-values.util';
 
 const validationSchema = Yup.object().shape({
   name: Yup.string().required('Name is required'),
@@ -44,7 +44,8 @@ export default function RegisterForm({ sx }: PageProps) {
   });
 
   const onSubmit = async (values: IRegister, _: FormikHelpers<IRegister>) => {
-    await callApi({ email: email.trim(), ...rest });
+    const { name, email, password } = trimValues(values);
+    await callApi({ name, email, password });
   };
 
   useEffect(() => {

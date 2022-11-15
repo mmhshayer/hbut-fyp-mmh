@@ -17,7 +17,7 @@
         [] Rate Limiting
         [] Healthchecks
     [] Known Issues
-        [] Trim whitespaces in input box
+        [X] Trim whitespaces in input box - (trim-value.util.ts)
 
 ## `git update-index --no-assume-unchanged ./thunder-tests/*`
 ## `git update-index --assume-unchanged ./thunder-tests/*`

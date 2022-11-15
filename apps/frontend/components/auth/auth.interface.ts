@@ -11,5 +11,5 @@ export interface LoginResponse {
 
 export interface IRegister extends ILogin {
   name: string;
-  passwordConfirmation: string;
+  passwordConfirmation?: string;
 }
