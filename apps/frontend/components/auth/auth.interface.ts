@@ -13,3 +13,7 @@ export interface IRegister extends ILogin {
   name: string;
   passwordConfirmation?: string;
 }
+
+export interface IRegisterCompany {
+  name: string;
+}
