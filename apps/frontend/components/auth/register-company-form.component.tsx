@@ -1,16 +1,17 @@
 import Card from '@mui/material/Card/Card';
 import Typography from '@mui/material/Typography/Typography';
 import Box from '@mui/system/Box/Box';
+import { useUser } from '../../features/user';
 import { Form, Formik, FormikHelpers } from 'formik';
-import { useState, useEffect } from 'react';
+import { useRouter } from 'next/router';
+import { useEffect } from 'react';
 import * as Yup from 'yup';
-import { Alert, PageLoader } from '../common';
 import useApi from '../../features/api/use-api.hook';
-import useAuth from '../../features/auth/use-auth.hook';
-import { FormikSubmitButton, FormikTextField } from '../form';
-import { IRegisterCompany, LoginResponse } from './auth.interface';
 import { PageProps } from '../../shared';
 import { trimValues } from '../../shared/trim-values.util';
+import { Alert, PageLoader } from '../common';
+import { FormikSubmitButton, FormikTextField } from '../form';
+import { IRegisterCompany } from './auth.interface';
 
 const validationSchema = Yup.object().shape({
   name: Yup.string().required('Name is required'),
@@ -21,10 +22,11 @@ const initialValues: IRegisterCompany = {
 };
 
 export default function RegisterForm({ sx }: PageProps) {
-  const { login } = useAuth();
-  const [loading, setLoading] = useState(false);
-  const { data, error, callApi } = useApi<LoginResponse, IRegisterCompany>({
-    url: '/auth/register',
+  const router = useRouter();
+  // const { addCompany } = useUser();
+
+  const { data, loading, error, callApi } = useApi<any, IRegisterCompany>({
+    url: '/company/',
     method: 'POST',
   });
 
@@ -32,17 +34,19 @@ export default function RegisterForm({ sx }: PageProps) {
     values: IRegisterCompany,
     _: FormikHelpers<IRegisterCompany>
   ) => {
-    const { name } = trimValues(values);
-    // await callApi({ name, email, password });
-    console.log({ name });
+    const company = trimValues(values);
+    await callApi(company as IRegisterCompany);
+    console.log(data);
   };
 
-  useEffect(() => {
-    if (data) {
-      setLoading(true);
-      login(data.access_token);
-    }
-  }, [data]);
+  // useEffect(() => {
+  //   if (data) {
+  //     addCompany(data);
+  //     setTimeout(() => {
+  //       router.push('/dashboard');
+  //     }, 1000);
+  //   }
+  // }, [data]);
 
   return (
     <PageLoader loading={loading}>
@@ -53,14 +57,12 @@ export default function RegisterForm({ sx }: PageProps) {
           }}
         >
           <Typography variant="h4">Register Company</Typography>
-
           {error?.statusMessage && (
             <Alert severity="error" sx={{ mt: 2 }}>
               {/* {error.message && t(error.message)} */}
               {error.statusMessage}
             </Alert>
           )}
-
           <Formik
             initialValues={initialValues}
             validationSchema={validationSchema}
