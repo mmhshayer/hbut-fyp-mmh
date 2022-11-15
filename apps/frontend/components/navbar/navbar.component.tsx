@@ -1,4 +1,3 @@
-import MenuIcon from '@mui/icons-material/Menu';
 import AppBar from '@mui/material/AppBar/AppBar';
 import IconButton from '@mui/material/IconButton/IconButton';
 import Toolbar from '@mui/material/Toolbar/Toolbar';
@@ -7,6 +6,7 @@ import Link from 'next/link';
 import useUser from '../../features/user/use-user.hook';
 import { LinkButton } from '../common';
 import ProfileButton from './profile-button.component';
+import FoodBankIcon from '@mui/icons-material/FoodBank';
 
 function NavBar() {
   const { user } = useUser();
@@ -26,7 +26,7 @@ function NavBar() {
           sx={{ mr: 2 }}
           href="/"
         >
-          <MenuIcon />
+          <FoodBankIcon />
         </IconButton>
         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
           <Link
