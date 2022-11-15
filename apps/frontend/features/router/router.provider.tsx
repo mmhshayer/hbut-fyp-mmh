@@ -8,6 +8,7 @@ import {
   LogoutRoute,
   PublicOnlyRoutes,
   PublicRoutes,
+  LoggedInRoutes,
 } from './router.config';
 import RouteGuardContext from './router.context';
 import {
@@ -63,6 +64,12 @@ const RouteGuardProvider: FC<PropsWithChildren> = ({ children }) => {
     PublicOnlyRoutes.forEach((route) => {
       if (asPath.startsWith(route)) {
         routeAdvice.targetRouteType = RouteType.PublicOnly;
+      }
+    });
+
+    LoggedInRoutes.forEach((route) => {
+      if (asPath.startsWith(route)) {
+        routeAdvice.targetRouteType = RouteType.LoggedIn;
       }
     });
 
