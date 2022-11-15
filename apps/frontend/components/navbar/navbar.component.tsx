@@ -42,7 +42,10 @@ function NavBar() {
         {user ? (
           <ProfileButton />
         ) : (
-          <LinkButton href="/login">Login</LinkButton>
+          <>
+            <LinkButton href="/login">Login</LinkButton>
+            <LinkButton href="/register">Register</LinkButton>
+          </>
         )}
       </Toolbar>
     </AppBar>
