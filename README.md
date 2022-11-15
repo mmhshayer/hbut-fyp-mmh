@@ -1,7 +1,15 @@
 # hbut-fyp-mmh
 
 ## Add package to backend
-    `mx g resource app/...`
+    template:   ```nx g resource app/...```
+    example :   ```nx g resource app/company```
+
+    select  :
+                ```
+                @nestjs/schematics:resource
+                @nrwl/nest:resource            <-
+                ```
+        
 
 # TODO
     [] Attach logger
