@@ -9,6 +9,7 @@ import { UsersModule } from './users';
 import { AuthModule } from './auth/auth.module';
 import { JwtAuthGuard } from './auth/authT.guard';
 import { APP_GUARD } from '@nestjs/core';
+import { CompanyModule } from './company/';
 
 @Module({
   imports: [
@@ -16,6 +17,7 @@ import { APP_GUARD } from '@nestjs/core';
     MongooseModule.forRoot(getMongoConfig()),
     AuthModule,
     UsersModule,
+    CompanyModule,
   ],
   controllers: [AppController],
   providers: [
