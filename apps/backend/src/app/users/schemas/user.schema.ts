@@ -6,10 +6,11 @@ import {
   IsString,
   MinLength,
 } from 'class-validator';
-import { Document } from 'mongoose';
+import { Document, Types } from 'mongoose';
 import { Status } from '../../../common/enumerators/status.enum';
 
 export type UserDocument = User & Document;
+export type UserDocumentWithId = UserDocument & { _id: Types.ObjectId };
 
 @Schema({ timestamps: true })
 export class User {
