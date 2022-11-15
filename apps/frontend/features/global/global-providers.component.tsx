@@ -10,8 +10,7 @@ const GlobalProviders: FC<PropsWithChildren> = ({ children }) => {
       <UserProvider>
         <RouteGuardProvider>
           <ThemeProvider>
-            {/* <RouteGuard>{children}</RouteGuard> */}
-            {children}
+            <RouteGuard>{children}</RouteGuard>
           </ThemeProvider>
         </RouteGuardProvider>
       </UserProvider>
