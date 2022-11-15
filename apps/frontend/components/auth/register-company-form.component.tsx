@@ -71,7 +71,6 @@ export default function RegisterForm({ sx }: PageProps) {
                 name="name"
                 // apiErrors={error?.validationErrors?.email}
                 textFieldProps={{
-                  variant: 'outlined',
                   label: 'Name',
                   placeholder: 'MD. John Doe',
                 }}

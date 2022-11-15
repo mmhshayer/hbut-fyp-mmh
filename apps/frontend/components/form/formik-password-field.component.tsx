@@ -13,7 +13,7 @@ type FormikPasswordFieldProps = GenericFieldHTMLAttributes & {
 
 const PasswordField: FC<TextFieldProps> = ({
   name = 'password',
-  variant = 'standard',
+  variant = 'outlined',
   fullWidth = true,
   placeholder = '******',
   label = 'Password',

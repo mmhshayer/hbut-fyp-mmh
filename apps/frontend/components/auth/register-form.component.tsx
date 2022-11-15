@@ -82,7 +82,6 @@ export default function RegisterForm({ sx }: PageProps) {
                 name="name"
                 // apiErrors={error?.validationErrors?.email}
                 textFieldProps={{
-                  variant: 'outlined',
                   label: 'Name',
                   placeholder: 'MD. John Doe',
                 }}
@@ -92,7 +91,6 @@ export default function RegisterForm({ sx }: PageProps) {
                 name="email"
                 // apiErrors={error?.validationErrors?.email}
                 textFieldProps={{
-                  variant: 'outlined',
                   label: 'Email',
                   placeholder: 'smith@gmail.com',
                 }}
@@ -102,7 +100,6 @@ export default function RegisterForm({ sx }: PageProps) {
                 name="password"
                 // apiErrors={error?.validationErrors?.password}
                 textFieldProps={{
-                  variant: 'outlined',
                   label: 'Password',
                   placeholder: 'At least 6 characters',
                 }}
@@ -112,7 +109,6 @@ export default function RegisterForm({ sx }: PageProps) {
                 name="passwordConfirmation"
                 // apiErrors={error?.validationErrors?.password}
                 textFieldProps={{
-                  variant: 'outlined',
                   label: 'Password Confirmation',
                   placeholder: 'At least 6 characters',
                 }}

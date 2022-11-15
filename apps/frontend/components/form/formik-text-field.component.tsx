@@ -5,7 +5,7 @@ import {
 import { Field, FieldProps, GenericFieldHTMLAttributes } from 'formik';
 
 function TextField({
-  variant = 'standard',
+  variant = 'outlined',
   fullWidth = true,
   sx,
   ...rest
