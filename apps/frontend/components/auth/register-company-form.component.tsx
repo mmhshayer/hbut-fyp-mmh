@@ -1,7 +1,6 @@
 import Card from '@mui/material/Card/Card';
 import Typography from '@mui/material/Typography/Typography';
 import Box from '@mui/system/Box/Box';
-import { useUser } from '../../features/user';
 import { Form, Formik, FormikHelpers } from 'formik';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
@@ -12,6 +11,7 @@ import { trimValues } from '../../shared/trim-values.util';
 import { Alert, PageLoader } from '../common';
 import { FormikSubmitButton, FormikTextField } from '../form';
 import { IRegisterCompany } from './auth.interface';
+import { toast } from 'react-toastify';
 
 const validationSchema = Yup.object().shape({
   name: Yup.string().required('Store Name is required'),
@@ -36,17 +36,17 @@ export default function RegisterForm({ sx }: PageProps) {
   ) => {
     const company = trimValues(values);
     await callApi(company as IRegisterCompany);
-    console.log(data);
   };
 
-  // useEffect(() => {
-  //   if (data) {
-  //     addCompany(data);
-  //     setTimeout(() => {
-  //       router.push('/dashboard');
-  //     }, 1000);
-  //   }
-  // }, [data]);
+  useEffect(() => {
+    if (data) {
+      // addCompany(data);
+      setTimeout(() => {
+        router.push('/');
+      }, 1000);
+      toast.success('Company added successfully');
+    }
+  }, [data]);
 
   return (
     <PageLoader loading={loading}>

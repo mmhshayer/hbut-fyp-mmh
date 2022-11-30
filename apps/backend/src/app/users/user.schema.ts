@@ -8,6 +8,7 @@ import {
 } from 'class-validator';
 import { Document, Types } from 'mongoose';
 import { Status } from '../../common/enumerators';
+import { Association } from './association.schema';
 
 export type UserDocument = User & Document;
 export type UserDocumentWithId = UserDocument & { _id: Types.ObjectId };
@@ -42,6 +43,18 @@ export class User {
     required: true,
   })
   password: string;
+
+  @IsOptional()
+  @Prop({
+    type: [
+      {
+        type: Types.ObjectId,
+        ref: Association.name,
+        required: false,
+      },
+    ],
+  })
+  associations: Types.ObjectId[];
 
   @IsOptional()
   @IsEnum(Status)
