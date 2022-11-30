@@ -1,6 +1,6 @@
 import { Container } from '@mui/system';
 import { NextPage } from 'next';
-import CompanyCards from '../components/auth/company-cards.component';
+import CompanyCards from '../components/company-selection/company-cards.component';
 
 const SelectCompany: NextPage = () => {
   return (

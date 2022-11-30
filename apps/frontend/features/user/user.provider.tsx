@@ -28,8 +28,6 @@ const UserProvider: FC<PropsWithChildren> = ({ children }) => {
     loading: companyListLoading,
   } = useApi<Company[]>({ url: '/company/list', lazy: true });
 
-  console.log('UserProvider', companyListData);
-
   useEffect(() => {
     if (!tokenLoaded) {
       return;
