@@ -29,11 +29,6 @@ export class CompanyController {
     return this.companyService.findAll();
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.companyService.findOne(+id);
-  }
-
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateCompanyDto: UpdateCompanyDto) {
     return this.companyService.update(+id, updateCompanyDto);
@@ -42,5 +37,11 @@ export class CompanyController {
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.companyService.remove(+id);
+  }
+
+  @Get('list')
+  async getCompaniesOfUser(@ReqUser() user: UserDocumentWithId) {
+    console.log('getCompaniesOfUser', user._id);
+    return await this.companyService.getCompaniesOfUser(user._id);
   }
 }
