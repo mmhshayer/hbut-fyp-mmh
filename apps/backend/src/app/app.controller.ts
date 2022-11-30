@@ -1,4 +1,5 @@
 import { Controller, Get, Request } from '@nestjs/common';
+import { ReqUser } from '../common/decorators';
 
 import { AppService } from './app.service';
 
@@ -16,8 +17,13 @@ export class AppController {
     return this.appService.getMongoConnectionStatus();
   }
 
+  // @Get('whoami')
+  // whoami(@Request() req) {
+  //   return this.appService.whoami(req);
+  // }
+
   @Get('whoami')
-  whoami(@Request() req) {
-    return this.appService.whoami(req);
+  whoami(@ReqUser() user) {
+    return this.appService.whoami(user);
   }
 }

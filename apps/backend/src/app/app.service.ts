@@ -22,7 +22,7 @@ export class AppService {
     return { mongoStatus: options[connection] };
   }
 
-  whoami(req) {
-    return req.user;
+  whoami(user) {
+    return user;
   }
 }
