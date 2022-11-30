@@ -83,6 +83,16 @@ const RouteGuardProvider: FC<PropsWithChildren> = ({ children }) => {
       }
     }
 
+    if (!user) {
+      if (routeAdvice.targetRouteType === RouteType.LoggedIn) {
+        routeAdvice.showContent = ShowContentAdvice.Hide;
+        routeAdvice.redirect = true;
+        routeAdvice.redirectRoute = HomeRoute;
+      } else {
+        routeAdvice.showContent = ShowContentAdvice.Show;
+      }
+    }
+
     if (tokenLoaded && !token) {
       if (routeAdvice.targetRouteType === RouteType.Private) {
         routeAdvice.showContent = ShowContentAdvice.Hide;
