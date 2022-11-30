@@ -12,6 +12,7 @@ import { Alert, PageLoader } from '../common';
 import { FormikSubmitButton, FormikTextField } from '../form';
 import { IRegisterCompany } from './auth.interface';
 import { toast } from 'react-toastify';
+import { useUser } from '../../features/user';
 
 const validationSchema = Yup.object().shape({
   name: Yup.string().required('Store Name is required'),
@@ -23,7 +24,7 @@ const initialValues: IRegisterCompany = {
 
 export default function RegisterForm({ sx }: PageProps) {
   const router = useRouter();
-  // const { addCompany } = useUser();
+  const { addCompany } = useUser();
 
   const { data, loading, error, callApi } = useApi<any, IRegisterCompany>({
     url: '/company/',
@@ -40,7 +41,7 @@ export default function RegisterForm({ sx }: PageProps) {
 
   useEffect(() => {
     if (data) {
-      // addCompany(data);
+      addCompany(data);
       setTimeout(() => {
         router.push('/');
       }, 1000);

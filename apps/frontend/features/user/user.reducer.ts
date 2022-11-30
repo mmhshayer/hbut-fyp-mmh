@@ -14,6 +14,29 @@ const UserReducer: Reducer<UserReducerStateType, UserReducerActionType> = (
         user: action.payload?.user,
       };
     }
+
+    case UserActionType.SET_CURRENT_COMPANY: {
+      if (action.payload?.currentCompany) {
+        saveCurrentCompanyId(action.payload.currentCompany._id);
+      }
+      return {
+        ...state,
+        currentCompany: action.payload?.currentCompany,
+      };
+    }
+
+    case UserActionType.ADD_COMPANY: {
+      const { companies = [] } = state;
+      let newCompanies = [...companies];
+      if (action.payload?.company) {
+        newCompanies = [...newCompanies, action.payload.company];
+      }
+      return {
+        ...state,
+        companies: newCompanies,
+      };
+    }
+
     case UserActionType.DESTROY_SESSION: {
       saveCurrentCompanyId('');
       return {};
