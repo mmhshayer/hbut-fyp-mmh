@@ -8,6 +8,16 @@ const UserReducer: Reducer<UserReducerStateType, UserReducerActionType> = (
   action
 ) => {
   switch (action.action) {
+    case UserActionType.SET_USER_COMPANY_DATA: {
+      if (action.payload?.currentCompany) {
+        saveCurrentCompanyId(action.payload.currentCompany._id);
+      }
+      return {
+        ...state,
+        ...action.payload,
+      };
+    }
+
     case UserActionType.SET_USER: {
       return {
         ...state,
