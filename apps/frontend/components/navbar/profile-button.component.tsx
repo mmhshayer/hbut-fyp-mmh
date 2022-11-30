@@ -2,6 +2,7 @@ import AccountCircle from '@mui/icons-material/AccountCircle';
 import IconButton from '@mui/material/IconButton';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
+import Link from 'next/link';
 import { useState } from 'react';
 import LinkButton from '../common/link-button.component';
 
@@ -43,6 +44,17 @@ function ProfileButton() {
       >
         <MenuItem onClick={handleClose}>Profile</MenuItem>
         <MenuItem onClick={handleClose}>My account</MenuItem>
+        <MenuItem onClick={handleClose}>
+          <Link
+            href="/register-company"
+            style={{
+              textDecoration: 'none',
+              color: 'inherit',
+            }}
+          >
+            Setup a Store
+          </Link>
+        </MenuItem>
         <MenuItem onClick={handleClose}>
           <LinkButton href="/logout">Logout</LinkButton>
         </MenuItem>
