@@ -14,7 +14,7 @@ import { FormikSubmitButton, FormikTextField } from '../form';
 import { IRegisterCompany } from './auth.interface';
 
 const validationSchema = Yup.object().shape({
-  name: Yup.string().required('Name is required'),
+  name: Yup.string().required('Store Name is required'),
 });
 
 const initialValues: IRegisterCompany = {
@@ -56,7 +56,7 @@ export default function RegisterForm({ sx }: PageProps) {
             p: 4,
           }}
         >
-          <Typography variant="h4">Register Company</Typography>
+          <Typography variant="h4">Register Store</Typography>
           {error?.statusMessage && (
             <Alert severity="error" sx={{ mt: 2 }}>
               {/* {error.message && t(error.message)} */}
@@ -73,8 +73,8 @@ export default function RegisterForm({ sx }: PageProps) {
                 name="name"
                 // apiErrors={error?.validationErrors?.email}
                 textFieldProps={{
-                  label: 'Name',
-                  placeholder: 'MD. John Doe',
+                  label: 'Store Name',
+                  placeholder: 'Enter your Store name',
                 }}
               />
               <Box
