@@ -5,6 +5,7 @@ const PageBody: FC<PropsWithChildren> = ({ children }) => {
   return (
     <Box
       sx={{
+        pt: 10,
         display: 'flex',
         flexDirection: 'column',
         minHeight: '100vh',
