@@ -1,25 +1,34 @@
 import { Injectable } from '@nestjs/common';
+import { InjectModel } from '@nestjs/mongoose';
+import { Model } from 'mongoose';
 import { CreateProductDto, UpdateProductDto } from './product.dto';
+import { Product } from './product.schema';
 
 @Injectable()
 export class ProductsService {
-  create(createProductDto: CreateProductDto) {
-    return 'This action adds a new product';
+
+  constructor(
+    @InjectModel('Product') private readonly productModel: Model<Product>
+  ) { }
+
+
+  async create(id: string, createProductDto: CreateProductDto) {
+    return await this.productModel.create({ ...createProductDto, company: id });
   }
 
-  findAll() {
-    return `This action returns all products`;
+  async findAll() {
+    return await this.productModel.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} product`;
+  async findOne(id: string) {
+    return await this.productModel.findById(id);
   }
 
-  update(id: number, updateProductDto: UpdateProductDto) {
-    return `This action updates a #${id} product`;
+  async update(id: string, updateProductDto: UpdateProductDto) {
+    return await this.productModel.findByIdAndUpdate(id, updateProductDto);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} product`;
+  async remove(id: string) {
+    return await this.productModel.findByIdAndDelete(id);
   }
 }

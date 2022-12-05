@@ -1,6 +1,7 @@
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
-import { IsString } from "class-validator";
+import { IsOptional, IsString } from "class-validator";
 import mongoose, { Types } from "mongoose";
+
 
 export type ProductDocument = Product & mongoose.Document;
 export type ProductDocumenttWithId = ProductDocument & { _id: Types.ObjectId };
@@ -21,19 +22,40 @@ export class Product {
     })
     price: number;
 
-    @IsString()
-    @Prop({
-        type: String,
-        required: false,
-    })
-    description: string;
+    // @IsMongoId()
+    // @Prop({
+    //     type: [
+    //         {
+    //             type: Types.ObjectId,
+    //             ref: Company.name,
+    //         },
+    //     ],
+    //     required: true,
+    // })
+    // company: string;
 
     @IsString()
     @Prop({
         type: String,
+        required: true,
+    })
+    company: string;
+
+    @IsOptional()
+    @IsString()
+    @Prop({
+        type: String,
         required: false,
     })
-    image: string;
+    description?: string;
+
+    @IsOptional()
+    @IsString()
+    @Prop({
+        type: String,
+        required: false,
+    })
+    image?: string;
 }
 
 export const ProductSchema = SchemaFactory.createForClass(Product);
