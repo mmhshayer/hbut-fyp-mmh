@@ -71,6 +71,10 @@ const RouteGuardProvider: FC<PropsWithChildren> = ({ children }) => {
       }
     });
 
+    if (asPath.startsWith(DashboardRoute)) {
+      routeAdvice.targetRouteType = RouteType.Dashboard;
+    }
+
 
     /*
       user LoggedIn
@@ -95,13 +99,9 @@ const RouteGuardProvider: FC<PropsWithChildren> = ({ children }) => {
         if user is not logged in, redirected to login with select-company as next
         else show content
     */
-    if (asPath.startsWith(DashboardRoute)) {
-      if (user && currentCompany) {
+    if (user && currentCompany) {
+      if (routeAdvice.targetRouteType === RouteType.Dashboard) {
         routeAdvice.showContent = ShowContentAdvice.Show;
-      } else {
-        routeAdvice.showContent = ShowContentAdvice.Hide;
-        routeAdvice.redirect = true;
-        routeAdvice.redirectRoute = SelectCompanyRoute;
       }
     }
 

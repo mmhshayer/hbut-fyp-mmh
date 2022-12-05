@@ -44,7 +44,7 @@ function NavBar() {
         sx={{ zIndex: (theme) => theme.zIndex.drawer + 1, bgcolor: 'background.default', color: 'text.primary' }}
       >
         <Toolbar>
-          {isDashboardRoute ? (
+          {user && isDashboardRoute ? (
             <IconButton
               size="large"
               edge="start"
