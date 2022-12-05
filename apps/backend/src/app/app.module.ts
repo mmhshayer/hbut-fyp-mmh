@@ -10,6 +10,7 @@ import { AuthModule } from './auth/auth.module';
 import { JwtAuthGuard } from './auth/authT.guard';
 import { APP_GUARD } from '@nestjs/core';
 import { CompanyModule } from './company/';
+import { ProductsModule } from './products/products.module';
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import { CompanyModule } from './company/';
     AuthModule,
     UsersModule,
     CompanyModule,
+    ProductsModule,
   ],
   controllers: [AppController],
   providers: [
