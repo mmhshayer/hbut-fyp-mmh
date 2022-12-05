@@ -9,6 +9,7 @@ import {
 } from '@nestjs/common';
 import { ProductsService } from './products.service';
 import { CreateProductDto, UpdateProductDto } from './product.dto';
+import { PublicRoute } from '../../common/decorators';
 
 @Controller('products')
 export class ProductsController {
@@ -19,6 +20,7 @@ export class ProductsController {
     return await this.productsService.create(id, createProductDto);
   }
 
+  @PublicRoute()
   @Get()
   async findAll() {
     return await this.productsService.findAll();
