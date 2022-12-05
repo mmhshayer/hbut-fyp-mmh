@@ -5,8 +5,12 @@ import { useUser } from '../../features/user';
 import { PageProps } from '../../shared';
 import CompanyCard from './company-card.component';
 import Company from '../../features/user/company.interface';
+import { DashboardRoute } from '../../features/router/router.config';
+import { useRouter } from 'next/router';
+import { toast } from 'react-toastify';
 
 export default function CompanyCards({ sx }: PageProps) {
+  const router = useRouter();
   const { companies, setCurrentCompany } = useUser();
   const [selected, setSelected] = useState<Company | null>(null);
 
@@ -15,11 +19,14 @@ export default function CompanyCards({ sx }: PageProps) {
     if (company) {
       setSelected(company);
     }
+
   };
 
   useEffect(() => {
     if (selected) {
       setCurrentCompany(selected);
+      toast.success(`You are now logged in as ${selected.name}`);
+      router.push(DashboardRoute);
     }
   }, [selected]);
 
