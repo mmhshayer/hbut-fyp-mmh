@@ -2,11 +2,14 @@ import AccountCircle from '@mui/icons-material/AccountCircle';
 import IconButton from '@mui/material/IconButton';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
+import { useUser } from '../../features/user';
 import Link from 'next/link';
 import { useState } from 'react';
 import LinkButton from '../common/link-button.component';
+import Dashboard from '../../pages/dashboard/index';
 
 function ProfileButton() {
+  const { companies } = useUser();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
   const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
@@ -42,6 +45,19 @@ function ProfileButton() {
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
+        {companies ? (
+          <MenuItem onClick={handleClose}>
+            <Link
+              href="/dashboard"
+              style={{
+                textDecoration: 'none',
+                color: 'inherit',
+              }}
+            >
+              Dashboard
+            </Link>
+          </MenuItem>
+        ) : null}
         <MenuItem onClick={handleClose}>Profile</MenuItem>
         <MenuItem onClick={handleClose}>My account</MenuItem>
         <MenuItem onClick={handleClose}>

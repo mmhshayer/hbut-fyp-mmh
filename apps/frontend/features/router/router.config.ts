@@ -8,4 +8,11 @@ export const LogoutRoute = '/logout';
 
 export const HomeRoute = '/';
 
-export const LoggedInRoutes: string[] = ['/register-company'];
+export const LoggedInRoutes: string[] = [
+  '/register-company',
+  '/select-company',
+];
+
+export const DashboardRoutes: string[] = ['/dashboard'];
+
+export const SelectCompanyRoute = '/select-company';

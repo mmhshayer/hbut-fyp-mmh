@@ -24,7 +24,7 @@ const initialValues: IRegisterCompany = {
 
 export default function RegisterForm({ sx }: PageProps) {
   const router = useRouter();
-  const { addCompany } = useUser();
+  const { user, addCompany } = useUser();
 
   const { data, loading, error, callApi } = useApi<any, IRegisterCompany>({
     url: '/company/',
@@ -52,44 +52,46 @@ export default function RegisterForm({ sx }: PageProps) {
   return (
     <PageLoader loading={loading}>
       <Box sx={{ ...sx }}>
-        <Card
-          sx={{
-            p: 4,
-          }}
-        >
-          <Typography variant="h4">Register Store</Typography>
-          {error?.statusMessage && (
-            <Alert severity="error" sx={{ mt: 2 }}>
-              {/* {error.message && t(error.message)} */}
-              {error.statusMessage}
-            </Alert>
-          )}
-          <Formik
-            initialValues={initialValues}
-            validationSchema={validationSchema}
-            onSubmit={onSubmit}
+        {user && (
+          <Card
+            sx={{
+              p: 4,
+            }}
           >
-            <Form>
-              <FormikTextField
-                name="name"
-                // apiErrors={error?.validationErrors?.email}
-                textFieldProps={{
-                  label: 'Store Name',
-                  placeholder: 'Enter your Store name',
-                }}
-              />
-              <Box
-                sx={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                }}
-              >
-                <FormikSubmitButton>submit</FormikSubmitButton>
-              </Box>
-            </Form>
-          </Formik>
-        </Card>
+            <Typography variant="h4">Register Store</Typography>
+            {error?.statusMessage && (
+              <Alert severity="error" sx={{ mt: 2 }}>
+                {/* {error.message && t(error.message)} */}
+                {error.statusMessage}
+              </Alert>
+            )}
+            <Formik
+              initialValues={initialValues}
+              validationSchema={validationSchema}
+              onSubmit={onSubmit}
+            >
+              <Form>
+                <FormikTextField
+                  name="name"
+                  // apiErrors={error?.validationErrors?.email}
+                  textFieldProps={{
+                    label: 'Store Name',
+                    placeholder: 'Enter your Store name',
+                  }}
+                />
+                <Box
+                  sx={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                  }}
+                >
+                  <FormikSubmitButton>submit</FormikSubmitButton>
+                </Box>
+              </Form>
+            </Formik>
+          </Card>
+        )}
       </Box>
     </PageLoader>
   );

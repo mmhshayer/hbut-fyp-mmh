@@ -13,4 +13,5 @@ export const enum RouteType {
   PublicOnly = 'PublicOnly',
   Private = 'Private',
   LoggedIn = 'LoggedIn',
+  Dashboard = 'Dashboard',
 }
