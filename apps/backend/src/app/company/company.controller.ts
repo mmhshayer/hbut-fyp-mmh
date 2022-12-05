@@ -41,7 +41,6 @@ export class CompanyController {
 
   @Get('list')
   async getCompaniesOfUser(@ReqUser() user: UserDocumentWithId) {
-    console.log('getCompaniesOfUser', user._id);
     return await this.companyService.getCompaniesOfUser(user._id);
   }
 }
