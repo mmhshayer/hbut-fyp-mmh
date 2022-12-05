@@ -3,18 +3,14 @@ import { FC, PropsWithChildren, useEffect, useReducer } from 'react';
 import { useAuth } from '../auth';
 import { useUser } from '../user';
 import {
-  HomeRoute,
-  LoginRoute,
-  LogoutRoute,
-  PublicOnlyRoutes,
-  PublicRoutes,
-  LoggedInRoutes,
+  DashboardRoute, HomeRoute, LogInRoute,
+  LogOutRoute, PrivateRoutes, PublicOnlyRoutes, SelectCompanyRoute
 } from './router.config';
 import RouteGuardContext from './router.context';
 import {
   RouteGuardActionType,
   RouteType,
-  ShowContentAdvice,
+  ShowContentAdvice
 } from './router.enum';
 import RouteGuardReducer, { RouteGuardInitialValue } from './router.reducer';
 
@@ -24,10 +20,9 @@ const RouteGuardProvider: FC<PropsWithChildren> = ({ children }) => {
     RouteGuardInitialValue
   );
   const { token, loaded: tokenLoaded } = useAuth();
-  const { user } = useUser();
+  const { user, currentCompany } = useUser();
   const {
     asPath,
-    pathname,
     isReady,
     query: { next = '' },
   } = useRouter();
@@ -45,8 +40,10 @@ const RouteGuardProvider: FC<PropsWithChildren> = ({ children }) => {
       targetRouteType: RouteType.Private,
     };
 
-    // Log Out is always available
-    if (asPath.startsWith(LogoutRoute)) {
+    /*
+      Log Out is always available
+    */
+    if (asPath.startsWith(LogOutRoute)) {
       routeAdvice.showContent = ShowContentAdvice.Show;
       dispatch({
         action: RouteGuardActionType.UPDATE_ROUTE_GUARD_DATA,
@@ -55,11 +52,12 @@ const RouteGuardProvider: FC<PropsWithChildren> = ({ children }) => {
       return;
     }
 
-    PublicRoutes.forEach((route) => {
-      if (asPath.startsWith(route)) {
-        routeAdvice.targetRouteType = RouteType.Public;
-      }
-    });
+    /*
+      Routes Extending Home is Public
+    */
+    if (asPath.startsWith(HomeRoute)) {
+      routeAdvice.targetRouteType = RouteType.Public;
+    }
 
     PublicOnlyRoutes.forEach((route) => {
       if (asPath.startsWith(route)) {
@@ -67,12 +65,19 @@ const RouteGuardProvider: FC<PropsWithChildren> = ({ children }) => {
       }
     });
 
-    LoggedInRoutes.forEach((route) => {
+    PrivateRoutes.forEach((route) => {
       if (asPath.startsWith(route)) {
-        routeAdvice.targetRouteType = RouteType.LoggedIn;
+        routeAdvice.targetRouteType = RouteType.Private;
       }
     });
 
+
+    /*
+      user LoggedIn
+      - if route is public only, redirect to home
+      - if route is private, show content
+      - if route is public, show content
+    */
     if (user) {
       if (routeAdvice.targetRouteType === RouteType.PublicOnly) {
         routeAdvice.showContent = ShowContentAdvice.Hide;
@@ -83,13 +88,20 @@ const RouteGuardProvider: FC<PropsWithChildren> = ({ children }) => {
       }
     }
 
-    if (!user) {
-      if (routeAdvice.targetRouteType === RouteType.LoggedIn) {
+    /*
+      If path starts with Dashboard
+        check if user is logged in and has company 
+        if not, redirect to select company
+        if user is not logged in, redirected to login with select-company as next
+        else show content
+    */
+    if (asPath.startsWith(DashboardRoute)) {
+      if (user && currentCompany) {
+        routeAdvice.showContent = ShowContentAdvice.Show;
+      } else {
         routeAdvice.showContent = ShowContentAdvice.Hide;
         routeAdvice.redirect = true;
-        routeAdvice.redirectRoute = HomeRoute;
-      } else {
-        routeAdvice.showContent = ShowContentAdvice.Show;
+        routeAdvice.redirectRoute = SelectCompanyRoute;
       }
     }
 
@@ -97,7 +109,7 @@ const RouteGuardProvider: FC<PropsWithChildren> = ({ children }) => {
       if (routeAdvice.targetRouteType === RouteType.Private) {
         routeAdvice.showContent = ShowContentAdvice.Hide;
         routeAdvice.redirect = true;
-        routeAdvice.redirectRoute = `${LoginRoute}?next=${next || asPath}`;
+        routeAdvice.redirectRoute = `${LogInRoute}?next=${next || asPath}`;
       } else {
         routeAdvice.showContent = ShowContentAdvice.Show;
       }

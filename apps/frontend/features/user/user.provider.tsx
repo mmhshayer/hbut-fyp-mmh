@@ -2,7 +2,7 @@ import { useRouter } from 'next/router';
 import { FC, PropsWithChildren, useEffect, useReducer } from 'react';
 import { useApi } from '../api';
 import { useAuth } from '../auth';
-import { LogoutRoute } from '../router/router.config';
+import { LogOutRoute } from '../router/router.config';
 import Company from './company.interface';
 import { LocalStorageCurrentCompanyKey } from './extended/constants';
 import { readCurrentCompanyId } from './extended/user.utils';
@@ -36,12 +36,12 @@ const UserProvider: FC<PropsWithChildren> = ({ children }) => {
       dispatch({ action: UserActionType.DESTROY_SESSION });
     }
     if (token && !state.user && !userLoading) {
-      if (!asPath.startsWith(LogoutRoute)) {
+      if (!asPath.startsWith(LogOutRoute)) {
         callUserApi();
       }
     }
     if (token && !state.companies && !companyListLoading) {
-      if (!asPath.startsWith(LogoutRoute)) {
+      if (!asPath.startsWith(LogOutRoute)) {
         callCompanyListApi();
       }
     }
