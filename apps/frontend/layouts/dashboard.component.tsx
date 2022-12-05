@@ -3,14 +3,16 @@ import { Footer } from '../components/footer';
 import { NavBar } from '../components/navbar';
 import PageBody from './page-body.component';
 
-const DefaultLayout: FC<PropsWithChildren> = ({ children }) => {
+const DashboardLayout: FC<PropsWithChildren> = ({ children }) => {
   return (
     <>
       <NavBar />
-      <PageBody>{children}</PageBody>
+      <PageBody>
+        {children}
+      </PageBody>
       <Footer />
     </>
   );
 };
 
-export default DefaultLayout;
+export default DashboardLayout;
