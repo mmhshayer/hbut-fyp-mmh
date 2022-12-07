@@ -1,4 +1,4 @@
-import { Box, Grid, Typography } from '@mui/material';
+import { Box, Grid, Paper, Typography } from '@mui/material';
 import { useApi } from '../../features/api';
 import { useRouter } from 'next/router';
 import { PageProps } from '../../shared/page.interface';
@@ -14,6 +14,8 @@ export default function ProductDetail({ sx }: PageProps) {
         lazy: true
     });
 
+    console.log(data)
+
     useEffect(() => {
         callApi();
     }, [router.isReady])
@@ -25,27 +27,37 @@ export default function ProductDetail({ sx }: PageProps) {
 
     return (
         <PageLoader loading={loading}>
-            {data && (
-                <Grid container spacing={2} sx={{
-                    ...sx,
-                }}>
-                    <Image src='/placeholder-400x400.jpg' width={400} height={400} alt={'Product Image'} />
-                    <Box sx={{
-                        pl: 2,
-                        display: 'flex',
-                        flexDirection: 'column',
-                        justifyContent: 'center',
-                    }}>
-                        <Typography variant='h4'>
-                            {data?.name}
-                        </Typography>
-                        <Typography variant='h4'>
-                            {data?.description}
-                        </Typography>
-                        <Typography variant='h4'>
-                            {data?.price} BDT
-                        </Typography>
-                    </Box>
+            {data && loaded && (
+                <Grid container spacing={{
+                    sm: 2,
+                    md: 16,
+                }}
+                    component={Paper}
+                    sx={{
+                        p: 4,
+                        ...sx
+                    }}
+                >
+                    <Grid item md={4}>
+                        <Image src='/placeholder-400x400.jpg' width={400} height={400} alt={'Product Image'} />
+                    </Grid>
+                    <Grid item md={4}>
+                        <Box sx={{
+                            display: 'flex',
+                            flexDirection: 'column',
+                            justifyContent: 'center',
+                            pl: {
+                                md: 4
+                            }
+                        }}>
+                            <Typography variant='h4'>
+                                {`${data?.name}`} -  {`${data?.price}`} BDT
+                            </Typography>
+                            <Typography variant='body2' >
+                                {`${data?.description}`}
+                            </Typography>
+                        </Box>
+                    </Grid>
                 </Grid>
             )}
         </PageLoader>
