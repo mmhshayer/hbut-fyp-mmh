@@ -20,7 +20,6 @@ export class UsersService {
   }
 
   async createUser(user: User, password: string) {
-    console.log(password, user);
     const exists = await this.userModel.exists({ email: user.email });
     if (exists) {
       throw new ConflictException('User already exists');
@@ -46,7 +45,6 @@ export class UsersService {
       (association) => association.company.toString() === companyId.toString()
     );
     if (exists) {
-      console.log(user);
       return user;
     }
 
