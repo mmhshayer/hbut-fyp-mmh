@@ -26,9 +26,10 @@ export class ProductsController {
     return await this.productsService.findAll();
   }
 
-  @Get(':id')
-  async findOne(@Param('id') id: string) {
-    return await this.productsService.findOne(id);
+  @PublicRoute()
+  @Get(':product')
+  async findOne(@Param('product') product: string) {
+    return await this.productsService.findOne(product);
   }
 
   @Patch(':id')
@@ -39,5 +40,11 @@ export class ProductsController {
   @Delete(':id')
   async remove(@Param('id') id: string) {
     return await this.productsService.remove(id);
+  }
+
+  @PublicRoute()
+  @Get('company/:company')
+  async getProductsOfCompany(@Param('company') company: string) {
+    return await this.productsService.getProductsOfCompany(company);
   }
 }

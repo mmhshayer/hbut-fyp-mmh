@@ -1,0 +1,1 @@
+export { default as CompanyDetail } from './detail.component';

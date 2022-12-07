@@ -1,4 +1,5 @@
-import { Box, Card, CardContent, CardHeader, CardMedia, Typography } from '@mui/material';
+import { Card, CardContent, CardHeader, CardMedia, Typography } from '@mui/material';
+import Link from 'next/link';
 import { PageProps } from '../../shared/page.interface';
 
 interface ProductCardProps extends PageProps {
@@ -9,8 +10,11 @@ export default function ProductCard({ sx, product }: ProductCardProps) {
     return (
         <Card sx={{ maxWidth: 345 }}>
             <CardHeader
-                title={product.name}
-                subheader={product.price}
+                title={<Link href={`${product.company}/${product.name}`} style={{
+                    textDecoration: 'none',
+                    color: 'inherit'
+                }}>{product.name}</Link>}
+                subheader={product.price + ' BDT'}
             />
             <CardMedia
                 component="img"

@@ -34,6 +34,13 @@ export class Company {
     ],
   })
   users: string[];
+
+  @IsString()
+  @Prop({
+    type: String,
+    required: true,
+  })
+  permalink: string;
 }
 
 export const CompanySchema = SchemaFactory.createForClass(Company);

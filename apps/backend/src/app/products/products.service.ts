@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { CreateProductDto, UpdateProductDto } from './product.dto';
@@ -20,8 +20,12 @@ export class ProductsService {
     return await this.productModel.find();
   }
 
-  async findOne(id: string) {
-    return await this.productModel.findById(id);
+  async findOne(product: string) {
+    const exists = await this.productModel.findOne({ name: product }).populate('company');
+    if (!exists) {
+      throw new NotFoundException('Product not found');
+    }
+    return exists;
   }
 
   async update(id: string, updateProductDto: UpdateProductDto) {
@@ -30,5 +34,11 @@ export class ProductsService {
 
   async remove(id: string) {
     return await this.productModel.findByIdAndDelete(id);
+  }
+
+  async getProductsOfCompany(company: string) {
+    return await this.productModel.find
+      ({ company })
+      .populate('company');
   }
 }

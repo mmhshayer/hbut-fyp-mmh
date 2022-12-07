@@ -9,7 +9,7 @@ import {
 } from '@nestjs/common';
 import { CompanyService } from './company.service';
 import { CreateCompanyDto, UpdateCompanyDto } from './company.dto';
-import { ReqUser } from '../../common/decorators';
+import { PublicRoute, ReqUser } from '../../common/decorators';
 import { UserDocumentWithId } from '../users';
 
 @Controller('company')
@@ -42,5 +42,11 @@ export class CompanyController {
   @Get('list')
   async getCompaniesOfUser(@ReqUser() user: UserDocumentWithId) {
     return await this.companyService.getCompaniesOfUser(user._id);
+  }
+
+  @PublicRoute()
+  @Get(':permalink')
+  async getCompanyByName(@Param('permalink') permalink: string) {
+    return await this.companyService.getCompanyByName(permalink);
   }
 }

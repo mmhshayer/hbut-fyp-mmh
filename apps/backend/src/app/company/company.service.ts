@@ -1,10 +1,11 @@
-import { Injectable, ConflictException } from '@nestjs/common';
+import { Injectable, ConflictException, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { UserDocumentWithId, UsersService } from '../users';
 import { CreateCompanyDto, UpdateCompanyDto } from './company.dto';
 import { Company } from './company.schema';
 import { RoleAtCompany } from '../../common/enumerators';
+import { generatePermalink } from '../../core/utils/permalink.util';
 
 @Injectable()
 export class CompanyService {
@@ -23,6 +24,7 @@ export class CompanyService {
     const company = await this.companyModel.create({
       ...createCompanyDto,
       users: [user._id],
+      permalink: generatePermalink(createCompanyDto.name),
     });
 
     await this.userService.addCompanyToUser(
@@ -50,5 +52,15 @@ export class CompanyService {
     return await this.companyModel.find({
       users: _id,
     });
+  }
+
+  async getCompanyByName(permalink: string) {
+    const exists = await this.companyModel.findOne({
+      permalink,
+    });
+    if (!exists) {
+      throw new NotFoundException('Company not found');
+    }
+    return exists;
   }
 }
