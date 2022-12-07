@@ -39,6 +39,13 @@
         "containerId": "",
         "created": "2022-12-04T09:26:18.657Z",
         "sortNum": 50000
+      },
+      {
+        "_id": "7339f524-9b3e-4e60-9753-21ad8c37f74c",
+        "name": "products",
+        "containerId": "",
+        "created": "2022-12-05T11:39:28.886Z",
+        "sortNum": 60000
       }
     ],
     "settings": {

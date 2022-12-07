@@ -137,5 +137,42 @@
       "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2Mzg3MmRiMjBkMWJmZDc3ZjRkYzMxNTUiLCJlbWFpbCI6Im11c3Rha2ltMTM1NzlAZ21haWwuY29tIiwiaWF0IjoxNjY5ODE2NTM1LCJleHAiOjE2Njk5MDI5MzV9.vTFAd0KpglGQtX2mGyTIO8bKDlAuA3Se6ADNGZhD8tE"
     },
     "tests": []
+  },
+  {
+    "_id": "0d1d8d4f-f4c4-477f-85ea-77a4aced07fd",
+    "colId": "9f9d3ecc-0e1f-486a-a101-610ea2409743",
+    "containerId": "7339f524-9b3e-4e60-9753-21ad8c37f74c",
+    "name": "create",
+    "url": "/products/638735be17b155538a3d1941",
+    "method": "POST",
+    "sortNum": 100000,
+    "created": "2022-12-05T11:39:34.265Z",
+    "modified": "2022-12-05T12:01:43.618Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"name\": \"mango\",\n  \"price\": \"123\"\n}",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "7dbd35a3-62b4-4b95-b6e0-fd7968dd5507",
+    "colId": "9f9d3ecc-0e1f-486a-a101-610ea2409743",
+    "containerId": "7339f524-9b3e-4e60-9753-21ad8c37f74c",
+    "name": "get all",
+    "url": "/products",
+    "method": "GET",
+    "sortNum": 110000,
+    "created": "2022-12-05T11:44:58.521Z",
+    "modified": "2022-12-05T11:45:16.124Z",
+    "headers": [],
+    "params": [],
+    "auth": {
+      "type": "bearer",
+      "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2Mzg3MmRiMjBkMWJmZDc3ZjRkYzMxNTUiLCJlbWFpbCI6Im11c3Rha2ltMTM1NzlAZ21haWwuY29tIiwiaWF0IjoxNjcwMjQwNDE5LCJleHAiOjE2NzAzMjY4MTl9.rDiUazY2cvpg_h2iT1AwfPp6MnPvU6qhYkE9f7Y2ybU"
+    },
+    "tests": []
   }
 ]
