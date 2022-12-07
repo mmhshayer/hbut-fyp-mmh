@@ -39,6 +39,7 @@
     "helmet": "^6.0.0",
     "mongodb": "^4.11.0",
     "mongoose": "^6.7.1",
+    "mui-datatables": "^4.2.2",
     "next": "13.0.0",
     "passport": "^0.6.0",
     "passport-jwt": "^4.0.0",
