@@ -7,6 +7,7 @@ interface ProductCardProps extends PageProps {
 }
 
 export default function ProductCard({ sx, product }: ProductCardProps) {
+    console.log(product)
     return (
         <Card sx={{ maxWidth: 345 }}>
                 <CardHeader
@@ -14,10 +15,10 @@ export default function ProductCard({ sx, product }: ProductCardProps) {
                     textDecoration: 'none',
                     color: 'inherit'
                 }}>{product.name}</Link>}
-                subheader={<Link href={`${product.company.name}`} style={{
+                subheader={<Link href={`${product.company.permalink}`} style={{
                     textDecoration: 'none',
                     color: 'inherit'
-                }}>{product.company.name}</Link>}
+                }}>By {product.company.name}</Link>}
                 />
                 <CardMedia
                     component="img"

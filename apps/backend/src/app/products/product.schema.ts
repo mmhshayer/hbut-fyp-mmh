@@ -1,6 +1,7 @@
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
-import { IsOptional, IsString } from "class-validator";
+import { IsMongoId, IsOptional, IsString } from "class-validator";
 import mongoose, { Types } from "mongoose";
+import { Company } from "../company";
 
 
 export type ProductDocument = Product & mongoose.Document;
@@ -22,24 +23,13 @@ export class Product {
     })
     price: number;
 
-    // @IsMongoId()
-    // @Prop({
-    //     type: [
-    //         {
-    //             type: Types.ObjectId,
-    //             ref: Company.name,
-    //         },
-    //     ],
-    //     required: true,
-    // })
-    // company: string;
-
-    @IsString()
+    @IsOptional()
+    @IsMongoId()
     @Prop({
-        type: String,
-        required: true,
+        type: Types.ObjectId,
+        ref: Company.name
     })
-    company: string;
+    company: Company;
 
     @IsOptional()
     @IsString()

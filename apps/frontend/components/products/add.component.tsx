@@ -29,7 +29,6 @@ const validationSchema = Yup.object().shape({
 export default function ProductAdd({ sx }: PageProps) {
     const router = useRouter();
     const { currentCompany } = useUser();
-    console.log(currentCompany);
     const [product, setProduct] = useState(initialValues);
 
     const { data, loading, loaded, error, callApi } = useApi({

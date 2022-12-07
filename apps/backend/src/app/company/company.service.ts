@@ -63,4 +63,8 @@ export class CompanyService {
     }
     return exists;
   }
+
+  async getCompanyById(_id: string) {
+    return await this.companyModel.findById(_id);
+  }
 }
