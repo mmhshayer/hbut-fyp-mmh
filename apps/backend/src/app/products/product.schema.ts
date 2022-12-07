@@ -56,6 +56,13 @@ export class Product {
         required: false,
     })
     image?: string;
+
+    @IsString()
+    @Prop({
+        type: String,
+        required: true,
+    })
+    permalink?: string;
 }
 
 export const ProductSchema = SchemaFactory.createForClass(Product);

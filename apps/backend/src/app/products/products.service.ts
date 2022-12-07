@@ -3,6 +3,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { CreateProductDto, UpdateProductDto } from './product.dto';
 import { Product } from './product.schema';
+import { generatePermalink } from '../../core/utils/permalink.util';
 
 @Injectable()
 export class ProductsService {
@@ -13,7 +14,7 @@ export class ProductsService {
 
 
   async create(id: string, createProductDto: CreateProductDto) {
-    return await this.productModel.create({ ...createProductDto, company: id });
+    return await this.productModel.create({ ...createProductDto, company: id, permalink: generatePermalink(createProductDto.name) });
   }
 
   async findAll() {
