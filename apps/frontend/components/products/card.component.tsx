@@ -11,7 +11,7 @@ export default function ProductCard({ sx, product }: ProductCardProps) {
     return (
         <Card sx={{ maxWidth: 345 }}>
                 <CardHeader
-                title={<Link href={`${product.company.name}/${product.name}`} style={{
+                title={<Link href={`${product.company.permalink}/${product.permalink}`} style={{
                     textDecoration: 'none',
                     color: 'inherit'
                 }}>{product.name}</Link>}

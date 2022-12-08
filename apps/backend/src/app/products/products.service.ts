@@ -34,7 +34,7 @@ export class ProductsService {
   }
 
   async findOne(product: string) {
-    const exists = await this.productModel.findOne({ name: product }).populate('company').exec();
+    const exists = await this.productModel.findOne({ permalink: product }).populate('company').exec();
     if (!exists) {
       throw new NotFoundException('Product not found');
     }
