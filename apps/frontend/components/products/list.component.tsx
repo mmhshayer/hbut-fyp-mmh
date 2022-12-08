@@ -100,11 +100,12 @@ export default function ProductList() {
                         View
                     </LinkButton>
                 </Box>
-                <Box>
+                {/*TODO: Fix Edit Products*/}
+                {/* <Box>
                     <LinkButton href={`/dashboard/products/${i?.permalink}`}>
                         Edit
                     </LinkButton>
-                </Box>
+                </Box> */}
                 <Box>
                     <Button
                         size='small'
