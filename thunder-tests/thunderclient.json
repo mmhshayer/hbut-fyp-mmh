@@ -174,5 +174,19 @@
       "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2Mzg3MmRiMjBkMWJmZDc3ZjRkYzMxNTUiLCJlbWFpbCI6Im11c3Rha2ltMTM1NzlAZ21haWwuY29tIiwiaWF0IjoxNjcwMjQwNDE5LCJleHAiOjE2NzAzMjY4MTl9.rDiUazY2cvpg_h2iT1AwfPp6MnPvU6qhYkE9f7Y2ybU"
     },
     "tests": []
+  },
+  {
+    "_id": "9c5943a6-55d9-4498-aa6f-841003ca5b59",
+    "colId": "9f9d3ecc-0e1f-486a-a101-610ea2409743",
+    "containerId": "95924162-db43-4c33-aea0-4fbf129d2f45",
+    "name": "get by name",
+    "url": "/company",
+    "method": "GET",
+    "sortNum": 120000,
+    "created": "2022-12-07T09:42:35.573Z",
+    "modified": "2022-12-07T09:42:51.639Z",
+    "headers": [],
+    "params": [],
+    "tests": []
   }
 ]
