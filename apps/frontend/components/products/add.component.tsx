@@ -46,7 +46,7 @@ export default function ProductAdd({ sx }: PageProps) {
     useEffect(() => {
         if (data) {
             toast.success('Product added successfully');
-            router.push(`/products`);
+            router.push(`/dashboard/products`);
         }
     }, [data])
 

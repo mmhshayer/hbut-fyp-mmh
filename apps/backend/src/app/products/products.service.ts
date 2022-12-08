@@ -45,8 +45,8 @@ export class ProductsService {
     return await this.productModel.findByIdAndUpdate(id, updateProductDto);
   }
 
-  async remove(id: string) {
-    return await this.productModel.findByIdAndDelete(id);
+  async remove(permalink: string) {
+    return await this.productModel.findOneAndDelete({ permalink });
   }
 
   async getProductsOfCompany(company: string) {

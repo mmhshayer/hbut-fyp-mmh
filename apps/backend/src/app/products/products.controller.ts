@@ -37,9 +37,9 @@ export class ProductsController {
     return await this.productsService.update(id, updateProductDto);
   }
 
-  @Delete(':id')
-  async remove(@Param('id') id: string) {
-    return await this.productsService.remove(id);
+  @Delete(':permalink')
+  async remove(@Param('permalink') permalink: string) {
+    return await this.productsService.remove(permalink);
   }
 
   @PublicRoute()

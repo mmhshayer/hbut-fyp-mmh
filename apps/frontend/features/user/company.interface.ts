@@ -8,4 +8,5 @@ export default interface Company {
   createdAt: string;
   updatedAt: string;
   users: User[];
+  permalink: string;
 }
