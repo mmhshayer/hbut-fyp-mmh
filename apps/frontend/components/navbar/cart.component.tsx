@@ -88,7 +88,7 @@ export default function Cart() {
                     justifyContent: 'center',
                     alignItems: 'center',
                 }}>
-                    <Button>
+                    <Button href='/checkout'>
                         Checkout
                     </Button>
                 </MenuItem>

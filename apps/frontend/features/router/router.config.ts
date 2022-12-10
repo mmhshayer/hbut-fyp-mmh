@@ -11,6 +11,7 @@ export const PublicOnlyRoutes: string[] = [
 export const PrivateRoutes: string[] = [
   '/register-company',
   '/select-company',
+  '/checkout',
 ];
 
 export const DashboardRoute = '/dashboard';
