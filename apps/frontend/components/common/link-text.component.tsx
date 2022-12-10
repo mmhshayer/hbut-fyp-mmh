@@ -1,5 +1,4 @@
 import { ButtonProps } from '@mui/material/Button';
-import { default as MuiLink } from '@mui/material/Link';
 import Link from 'next/link';
 import { FC, PropsWithChildren } from 'react';
 
@@ -18,10 +17,13 @@ const LinkText: FC<PropsWithChildren<LinkTextProps>> = ({
       href={href}
       style={{
         textDecoration: 'none',
+        color: 'inherit',
       }}
       passHref
     >
-      <MuiLink sx={{ textAlign: 'center' }}>{children}</MuiLink>
+      <p>
+        {children}
+      </p>
     </Link>
   );
 };
