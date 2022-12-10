@@ -4,16 +4,17 @@ import Toolbar from '@mui/material/Toolbar/Toolbar';
 import Typography from '@mui/material/Typography/Typography';
 import Link from 'next/link';
 import useUser from '../../features/user/use-user.hook';
-import { LinkButton } from '../common';
 import ProfileButton from './profile-button.component';
 import FoodBankIcon from '@mui/icons-material/FoodBank';
 import MenuIcon from '@mui/icons-material/Menu';
 import { DashboardRoute } from '../../features/router/router.config';
 import { useRouter } from 'next/router';
 import Box from '@mui/material/Box';
-import { Drawer, List, ListItem, ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
+import { Drawer, List, ListItem, ListItemButton, ListItemText } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { sidebarLinks } from './sidebar.seed';
+import Cart from './cart.component';
+import LoginAndRegisterButtons from './login-and-register-buttons.component';
 
 const drawerWidth = 240;
 
@@ -78,13 +79,11 @@ function NavBar() {
               Foodie
             </Link>
           </Typography>
+          <Cart />
           {user ? (
             <ProfileButton />
           ) : (
-            <>
-              <LinkButton href="/login">Login</LinkButton>
-              <LinkButton href="/register">Register</LinkButton>
-            </>
+              <LoginAndRegisterButtons />
           )}
         </Toolbar>
       </AppBar>
