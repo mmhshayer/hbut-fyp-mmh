@@ -4,6 +4,7 @@ import { Model } from 'mongoose';
 import { UserDocumentWithId } from '../users';
 import { CreateOrderDto } from './order.dto';
 import { Order, OrderDocument } from './order.schema';
+import { OrderStatus } from '../../common/enumerators/order-status.enum';
 
 @Injectable()
 export class OrdersService {
@@ -38,5 +39,9 @@ export class OrdersService {
     })
 
     return filteredData;
+  }
+
+  async update(id: string) {
+    return await this.orderModel.findByIdAndUpdate(id, { status: OrderStatus.Delivered }, { new: true });
   }
 }

@@ -4,6 +4,7 @@ import {
   Post,
   Body,
   Param,
+  Put,
 } from '@nestjs/common';
 import { OrdersService } from './orders.service';
 import { CreateOrderDto } from './order.dto';
@@ -28,5 +29,11 @@ export class OrdersController {
   @Get('company/:id')
   async findAllByCompany(@Param('id') id: string) {
     return await this.ordersService.findAllByCompany(id);
+  }
+
+  @Put(':id')
+  async update(@Param('id') id: string) {
+    console.log(id)
+    return await this.ordersService.update(id);
   }
 }

@@ -63,6 +63,7 @@ export default function OrderList() {
                         size='small'
                         variant='outlined'
                         color='error'
+                        disabled={i.status === 'Delivered'}
                         onClick={() => {
                             setTarget(i);
                             setShowPrompt(true);
