@@ -2,7 +2,6 @@ import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { UserDocumentWithId } from '../users';
-import { OrderItemService } from './order-item.service';
 import { CreateOrderDto } from './order.dto';
 import { Order, OrderDocument } from './order.schema';
 
@@ -10,17 +9,12 @@ import { Order, OrderDocument } from './order.schema';
 export class OrdersService {
   constructor(
     @InjectModel(Order.name) private orderModel: Model<OrderDocument>,
-    private readonly orderItemService: OrderItemService,
   ) { }
 
   async create(user: UserDocumentWithId, createOrderDto: CreateOrderDto) {
-    const items = await Promise.all(
-      createOrderDto.items.map((item) => this.orderItemService.create(item))
-    );
     return await this.orderModel.create({
       ...createOrderDto,
       user: user._id,
-      items,
     });
   }
 
@@ -29,12 +23,20 @@ export class OrdersService {
   }
 
   async findAllByCompany(id: string) {
-    return await this.orderModel.find({
-      items: {
-        $elemMatch: {
-          company: id,
-        },
+    const data: Order[] = await this.orderModel.find().populate([
+      {
+        path: 'products.product',
       },
-    }).populate('user');
+    ]).exec();
+
+    const filteredData = data.filter((order) => {
+      return order.products.some((product) => {
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
+        return product.product.company.toString() === id;
+      });
+    })
+
+    return filteredData;
   }
 }

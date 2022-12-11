@@ -3,12 +3,10 @@ import {
   Get,
   Post,
   Body,
-  Patch,
   Param,
-  Delete,
 } from '@nestjs/common';
 import { OrdersService } from './orders.service';
-import { CreateOrderDto, UpdateOrderDto } from './order.dto';
+import { CreateOrderDto } from './order.dto';
 import { ReqUser } from '../../common/decorators';
 import { UserDocumentWithId } from '../users';
 
@@ -25,5 +23,10 @@ export class OrdersController {
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.ordersService.findOne(id);
+  }
+
+  @Get('company/:id')
+  async findAllByCompany(@Param('id') id: string) {
+    return await this.ordersService.findAllByCompany(id);
   }
 }

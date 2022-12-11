@@ -1,34 +1,42 @@
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
-import { IsEnum, IsMongoId, IsNumber, IsObject, IsOptional } from "class-validator";
+import { IsEnum, IsMongoId, IsNumber, IsOptional } from "class-validator";
 import mongoose, { Types } from "mongoose";
 import { OrderStatus } from "../../common/enumerators";
-import { User } from "../users";
-import { Product } from '../products/product.schema';
-import { OrderItem } from "./order-item.schema";
+import { Product } from "../products/product.schema";
+import { User, UserDocumentWithId, UserSchema } from "../users";
 
 export type OrderDocument = Order & mongoose.Document;
 export type OrderDocumenttWithId = OrderDocument & { _id: Types.ObjectId };
 
+@Schema({
+    _id: false,
+    versionKey: false,
+})
+export class OrderProduct {
+    @IsMongoId()
+    @Prop({
+        type: Types.ObjectId,
+        ref: Product.name,
+    })
+    product: Product[];
+
+    @IsNumber()
+    @Prop({
+        required: true,
+    })
+    quantity: number;
+}
+
+const OrderProductSchema = SchemaFactory.createForClass(OrderProduct);
 
 @Schema({ timestamps: true })
 export class Order {
 
     @IsOptional()
-    @Prop({
-        type: [{ item: { type: Types.ObjectId, ref: Product.name }, quantity: Number }],
-    })
-    items: Items[];
-
-    @IsOptional()
-    @Prop({
-        type: [
-            {
-                type: Types.ObjectId,
-                ref: OrderItem.name,
-            }
-        ]
-    })
-    orderItems: Types.ObjectId[];
+    @Prop([{
+        type: OrderProductSchema,
+    }])
+    products: OrderProduct[];
 
     @IsNumber()
     @Prop({
@@ -44,30 +52,12 @@ export class Order {
     })
     status: OrderStatus;
 
-    @IsOptional()
     @IsMongoId()
     @Prop({
         type: Types.ObjectId,
         ref: User.name,
     })
-    users: User;
+    user: User;
 }
-
-export class Items {
-    @IsMongoId()
-    @Prop({
-        type: Types.ObjectId,
-        ref: Product.name,
-    })
-    item: string;
-
-    @IsNumber()
-    @Prop({
-        required: true,
-    })
-    quantity: number;
-}
-
-
 
 export const OrderSchema = SchemaFactory.createForClass(Order);

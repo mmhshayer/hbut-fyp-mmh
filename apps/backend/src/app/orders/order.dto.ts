@@ -2,7 +2,7 @@ import { PartialType, PickType } from "@nestjs/swagger";
 import { Order } from './order.schema';
 
 export class CreateOrderDto extends PickType(Order, [
-    'items',
+    'products',
     'total',
 ] as const) { }
 
