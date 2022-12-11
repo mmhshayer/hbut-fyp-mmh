@@ -18,4 +18,9 @@ export const sidebarLinks: SidebarLink[] = [
         icon: ListAltIcon,
         path: '/orders',
     },
+    {
+        name: 'POS',
+        icon: ListAltIcon,
+        path: '/pos',
+    },
 ]
