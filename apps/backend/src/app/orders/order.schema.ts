@@ -4,6 +4,7 @@ import mongoose, { Types } from "mongoose";
 import { OrderStatus } from "../../common/enumerators";
 import { User } from "../users";
 import { Product } from '../products/product.schema';
+import { OrderItem } from "./order-item.schema";
 
 export type OrderDocument = Order & mongoose.Document;
 export type OrderDocumenttWithId = OrderDocument & { _id: Types.ObjectId };
@@ -17,6 +18,17 @@ export class Order {
         type: [{ item: { type: Types.ObjectId, ref: Product.name }, quantity: Number }],
     })
     items: Items[];
+
+    @IsOptional()
+    @Prop({
+        type: [
+            {
+                type: Types.ObjectId,
+                ref: OrderItem.name,
+            }
+        ]
+    })
+    orderItems: Types.ObjectId[];
 
     @IsNumber()
     @Prop({

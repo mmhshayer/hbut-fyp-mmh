@@ -22,7 +22,7 @@ export default function CheckoutForm({ sx }: PageProps) {
     const handleCheckout = () => {
         const checkout = {
             items: items.map((item) => ({
-                name: item.name,
+                _id: item._id,
                 quantity: item.quantity
             })),
             total: items.reduce((acc, item) => acc + (item.price * item.quantity), 0),
