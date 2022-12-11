@@ -1,12 +1,42 @@
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/system/Box';
+import { useApi } from '../../features/api';
 import React from 'react'
 import { useCart } from 'react-use-cart';
 import { PageProps } from '../../shared/page.interface';
+import { useEffect } from 'react';
+import { useRouter } from 'next/router';
+import { toast } from 'react-toastify';
 
 export default function CheckoutForm({ sx }: PageProps) {
-    const { items } = useCart();
+    const router = useRouter();
+    const { items, emptyCart } = useCart();
+
+    const { data, loading, callApi } = useApi({
+        url: '/orders',
+        method: 'POST',
+        lazy: true,
+    });
+
+    const handleCheckout = () => {
+        const checkout = {
+            items: items.map((item) => ({
+                name: item.name,
+                quantity: item.quantity
+            })),
+            total: items.reduce((acc, item) => acc + (item.price * item.quantity), 0),
+        }
+        callApi(checkout)
+    }
+
+    useEffect(() => {
+        if (!loading && data) {
+            emptyCart();
+            toast.success('Checkout successful')
+            router.push('/')
+        }
+    }, [data])
 
     return (
         <Box sx={{
@@ -71,7 +101,7 @@ export default function CheckoutForm({ sx }: PageProps) {
                 padding: '10px',
                 margin: '10px',
             }}>
-                <Button variant='contained' color='primary'>
+                <Button variant='contained' color='primary' onClick={handleCheckout}>
                     Confirm Checkout
                 </Button>
                 <Typography variant='h4'>

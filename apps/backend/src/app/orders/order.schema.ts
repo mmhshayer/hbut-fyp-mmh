@@ -12,7 +12,7 @@ export type OrderDocumenttWithId = OrderDocument & { _id: Types.ObjectId };
 @Schema({ timestamps: true })
 export class Order {
 
-    @IsObject()
+    @IsOptional()
     @Prop({
         type: [{ item: { type: Types.ObjectId, ref: Product.name }, quantity: Number }],
     })
