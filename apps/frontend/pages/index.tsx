@@ -1,4 +1,4 @@
-import { Typography } from '@mui/material';
+import { Typography, Box } from '@mui/material';
 import { ProductCard } from '../components/products';
 import { useApi } from '../features/api';
 
@@ -12,8 +12,16 @@ export function Index() {
       <Typography
         variant="h2"
         sx={{ textAlign: 'center' }}
-      >Hungry ?</Typography>
-      {data ? data.map((product, index) => <ProductCard key={index} product={product} />) : <p>No Products</p>}
+      >Hot Items</Typography>
+      <Box sx={{
+        display: 'flex',
+        flexWrap: 'wrap',
+        justifyContent: 'center',
+        gap: 2,
+        p: 2,
+      }}>
+        {data ? data.map((product, index) => <ProductCard key={index} product={product} />) : <p>No Products</p>}
+      </Box>
     </>
   );
 }
