@@ -36,4 +36,9 @@ export class OrdersController {
     console.log(id)
     return await this.ordersService.update(id);
   }
+
+  @Post('pos/:id')
+  async createPos(@Param('id') id: string, @Body() createOrderDto: CreateOrderDto) {
+    return await this.ordersService.createPos(id, createOrderDto);
+  }
 }

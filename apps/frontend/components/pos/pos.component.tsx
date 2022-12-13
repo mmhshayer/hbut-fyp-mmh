@@ -3,16 +3,16 @@ import useApi from '../../features/api/use-api.hook';
 import { Product } from "../products/product.interface";
 import { useEffect } from 'react';
 import { Button, IconButton, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@mui/material';
-import RemoveIcon from '@mui/icons-material/Remove';
 import PageLoader from '../common/page-loader.component';
-import Typography from '@mui/material/Typography';
 import { useCart } from 'react-use-cart';
 import { useRouter } from "next/router";
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import RemoveShoppingCartIcon from '@mui/icons-material/RemoveShoppingCart';
+import { useUser } from '../../features/user';
 
 export default function Pos() {
     const router = useRouter();
+    const { currentCompany } = useUser()
     const { emptyCart, addItem, removeItem, items, cartTotal
     } = useCart()
 
@@ -21,7 +21,7 @@ export default function Pos() {
     });
 
     const { data, loading, callApi } = useApi({
-        url: '/orders',
+        url: `/orders/pos/${currentCompany._id}`,
         method: 'POST',
         lazy: true,
     });
@@ -40,8 +40,8 @@ export default function Pos() {
             })),
             total: items.reduce((acc, item) => acc + (item.price * item.quantity), 0),
         }
-        // callApi(checkout)
         console.log(checkout)
+        callApi(checkout)
     }
 
     if (!products) return null;

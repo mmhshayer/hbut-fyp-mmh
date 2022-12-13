@@ -44,4 +44,11 @@ export class OrdersService {
   async update(id: string) {
     return await this.orderModel.findByIdAndUpdate(id, { status: OrderStatus.Delivered }, { new: true });
   }
+
+  async createPos(id: string, createOrderDto: CreateOrderDto) {
+    return await this.orderModel.create({
+      ...createOrderDto,
+      user: id,
+    });
+  }
 }
