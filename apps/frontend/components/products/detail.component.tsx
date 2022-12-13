@@ -1,13 +1,15 @@
-import { Box, Grid, Paper, Typography } from '@mui/material';
+import { Box, Button, Grid, Paper, Typography } from '@mui/material';
 import { useApi } from '../../features/api';
 import { useRouter } from 'next/router';
 import { PageProps } from '../../shared/page.interface';
 import { useEffect } from 'react';
 import { PageLoader } from '../common';
 import Image from 'next/image'
+import { useCart } from 'react-use-cart';
 
 export default function ProductDetail({ sx }: PageProps) {
     const router = useRouter();
+    const { addItem } = useCart();
     const { product } = router.query;
     const { data, loading, loaded, error, callApi } = useApi({
         url: `/products/${product}`,
@@ -51,11 +53,23 @@ export default function ProductDetail({ sx }: PageProps) {
                             }
                         }}>
                             <Typography variant='h4'>
-                                {`${data?.name}`} -  {`${data?.price}`} BDT
+                                {`${data?.name}`} - {`${data?.price}`} BDT
                             </Typography>
-                            <Typography variant='body2' >
+                            <Typography variant='body2'>
                                 {`${data?.description}`}
                             </Typography>
+                            <Box sx={{
+                                display: 'flex',
+                                justifyContent: 'left',
+                                mt: 4
+                            }}>
+                                <Button variant='contained' onClick={() => addItem({
+                                    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                                    // @ts-ignore
+                                    id: data._id,
+                                    ...data
+                                })}>Add to Cart</Button>
+                            </Box>
                         </Box>
                     </Grid>
                 </Grid>
