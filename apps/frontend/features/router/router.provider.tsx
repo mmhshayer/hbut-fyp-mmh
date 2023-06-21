@@ -93,16 +93,20 @@ const RouteGuardProvider: FC<PropsWithChildren> = ({ children }) => {
     }
 
     /*
-      If path starts with Dashboard
-        check if user is logged in and has company 
-        if not, redirect to select company
-        if user is not logged in, redirected to login with select-company as next
-        else show content
+    If path starts with Dashboard
+    check if user is logged in and has company 
+    if not, redirect to select company
+    if user is not logged in, redirected to login with select-company as next
+    else show content
     */
-    if (user && currentCompany) {
+    if (!!user && !!currentCompany) {
       if (routeAdvice.targetRouteType === RouteType.Dashboard) {
         routeAdvice.showContent = ShowContentAdvice.Show;
       }
+    } else if (asPath.startsWith(DashboardRoute)) {
+      routeAdvice.showContent = ShowContentAdvice.Hide;
+      routeAdvice.redirect = true;
+      routeAdvice.redirectRoute = SelectCompanyRoute;
     }
 
     if (tokenLoaded && !token) {
